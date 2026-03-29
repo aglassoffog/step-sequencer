@@ -26,3 +26,16 @@ function scheduler() {
     nextNote();
   }
 }
+
+function start() {
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+  currentStep = 0;
+  nextNoteTime = audioCtx.currentTime;
+  timerID = setInterval(scheduler, lookahead);
+}
+
+function stop() {
+  clearInterval(timerID);
+}
