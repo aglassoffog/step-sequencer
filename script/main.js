@@ -22,70 +22,7 @@ for (let i=0;i<16;i++) patterns[0][i] = 1;
 patterns[1][4] = patterns[1][12] = 1;
 patterns[2][0] = patterns[2][4] = patterns[2][8] = patterns[2][12] = 1;
 
-// UI作成
-const container = document.getElementById("sequencer");
-
-patterns.forEach((pattern, trackIndex) => {
-  const row = document.createElement("div");
-  row.className = "row";
-
-  pattern.forEach((step, stepIndex) => {
-    const div = document.createElement("div");
-    div.className = "step";
-    div.onclick = () => {
-      pattern[stepIndex] ^= 1;
-      div.classList.toggle("active");
-    };
-
-    if (step) {
-      div.classList.add("active");
-    }
-
-    row.appendChild(div);
-  });
-
-  container.appendChild(row);
-});
-
-// ステップ長（16分音符）
-function stepDuration() {
-  return (60 / tempo) / 4;
-}
-
-// スケジュール
-function scheduleStep(step, time) {
-  if (patterns[0][step]) playHihat(time);
-  if (patterns[1][step]) playSnare(time);
-  if (patterns[2][step]) playKick(time);
-
-  highlightStep(step);
-}
-
-// 次へ
-function nextNote() {
-  nextNoteTime += stepDuration();
-  currentStep = (currentStep + 1) % steps;
-}
-
-// スケジューラ
-function scheduler() {
-  while (nextNoteTime < audioCtx.currentTime + scheduleAheadTime) {
-    // パターン選択
-    scheduleStep(currentStep, nextNoteTime);
-    nextNote();
-  }
-}
-
-// ハイライト
-function highlightStep(step) {
-  const rows = document.querySelectorAll(".row");
-
-  rows.forEach(row => {
-    [...row.children].forEach((cell, i) => {
-      cell.classList.toggle("playing", i === step);
-    });
-  });
-}
+initUI();
 
 // スタート
 function start() {
@@ -100,4 +37,44 @@ function start() {
 // ストップ
 function stop() {
   clearInterval(timerID);
+}
+
+function savePattern() {
+  const data = {
+    patterns: patterns,
+    tempo: tempo
+  };
+
+  localStorage.setItem("sequencerPattern", JSON.stringify(data));
+  localStorage.setItem("pattern_" + name, JSON.stringify(data));
+  console.log("Saved!");
+}
+
+function loadPattern() {
+  const data = localStorage.getItem("sequencerPattern");
+  if (!data) return;
+
+  const parsed = JSON.parse(data);
+
+  patterns = parsed.patterns;
+  tempo = parsed.tempo || 120;
+
+  updateUI();
+  console.log("Loaded!");
+}
+
+function clearPattern() {
+  patterns.forEach(track => track.fill(0));
+  updateUI();
+}
+
+function exportPattern() {
+  const data = JSON.stringify({ patterns, tempo });
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "pattern.json";
+  a.click();
 }
