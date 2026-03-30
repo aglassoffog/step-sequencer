@@ -1,6 +1,3 @@
-let audioCtx = null;
-audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 let tempo = 120;
 let steps = 16;
 let currentStep = 0;

@@ -13,20 +13,14 @@ function savePattern(seqIndex) {
   updatePatternList();
 }
 
-function savePattern0() {
-  savePattern(0);
-}
-
-function savePattern1() {
-  savePattern(1);  
-}
-
 function updatePatternList() {
   const list = document.getElementById("patternList");
   list.innerHTML = "";
 
-  Object.keys(localStorage).forEach(key => {
-    if (!key.startsWith("pattern_")) return;
+  Object.keys(localStorage)
+    .filter(key => key.startsWith("pattern_"))
+    .sort()
+    .forEach(key => {
 
     const name = key.replace("pattern_", "");
     const li = document.createElement("li");
@@ -82,14 +76,6 @@ function loadPattern(seqIndex, name) {
 function clearPattern(seqIndex) {
   patterns[seqIndex].forEach(track => track.fill(0));
   updateUI(seqIndex);
-}
-
-function clearPattern0() {
-  clearPattern(0);
-}
-
-function clearPattern1() {
-  clearPattern(1);
 }
 
 function exportPattern() {

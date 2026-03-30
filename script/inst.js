@@ -1,4 +1,4 @@
-function playKick(time) {
+function playKick(seqIndex, time) {
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
 
@@ -8,12 +8,12 @@ function playKick(time) {
   gain.gain.setValueAtTime(1, time);
   gain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
 
-  osc.connect(gain).connect(audioCtx.destination);
+  osc.connect(gain).connect(seqGains[seqIndex]);
   osc.start(time);
   osc.stop(time + 0.1);
 }
 
-function playSnare(time) {
+function playSnare(seqIndex, time) {
   const noise = audioCtx.createBufferSource();
   const buffer = audioCtx.createBuffer(1, 44100, 44100);
   const data = buffer.getChannelData(0);
@@ -24,11 +24,11 @@ function playSnare(time) {
   gain.gain.setValueAtTime(1, time);
   gain.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
 
-  noise.connect(gain).connect(audioCtx.destination);
+  noise.connect(gain).connect(seqGains[seqIndex]);
   noise.start(time);
 }
 
-function playHihat(time) {
+function playHihat(seqIndex, time) {
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
 
@@ -38,7 +38,7 @@ function playHihat(time) {
   gain.gain.setValueAtTime(0.3, time);
   gain.gain.exponentialRampToValueAtTime(0.01, time + 0.05);
 
-  osc.connect(gain).connect(audioCtx.destination);
+  osc.connect(gain).connect(seqGains[seqIndex]);
   osc.start(time);
   osc.stop(time + 0.05);
 }

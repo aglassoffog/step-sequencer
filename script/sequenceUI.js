@@ -1,15 +1,15 @@
 function initUI(seqIndex) {
   const container = document.getElementById("sequencer" + seqIndex);
 
-  patterns[seqIndex].forEach((pattern, trackIndex) => {
+  patterns[seqIndex].forEach((track, trackIndex) => {
     const row = document.createElement("div");
     row.className = "row" + seqIndex;
 
-    pattern.forEach((step, stepIndex) => {
+    track.forEach((_, stepIndex) => {
       const div = document.createElement("div");
       div.className = "step";
       div.onclick = () => {
-        pattern[stepIndex] ^= 1;
+        patterns[seqIndex][trackIndex][stepIndex] ^= 1;
         div.classList.toggle("active");
       };
 
@@ -41,4 +41,6 @@ function updateUI(seqIndex) {
       cell.classList.toggle("active", isActive);
     });
   });
+
+
 }

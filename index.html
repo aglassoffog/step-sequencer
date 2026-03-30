@@ -18,16 +18,33 @@
     <h3>Sequence1</h3>
     <div id="sequencer0"></div>
     <input id="patternName0" placeholder="pattern name">
-    <button onclick="savePattern0()">Save</button>
-    <button onclick="clearPattern0()">Clear</button>
+    <button onclick="savePattern(0)">Save</button>
+    <button onclick="clearPattern(0)">Clear</button>
 
     <br>
 
     <h3>Sequence2</h3>
     <div id="sequencer1"></div>
     <input id="patternName1" placeholder="pattern name">
-    <button onclick="savePattern1()">Save</button>
-    <button onclick="clearPattern1()">Clear</button>
+    <button onclick="savePattern(1)">Save</button>
+    <button onclick="clearPattern(1)">Clear</button>
+
+    <br>
+
+    <h3>Mixer</h3>
+    <div>
+      Sequence1 <input type="range" min="0" max="1" step="0.01" value="1"
+        oninput="setVolume(0, this.value)">
+    </div>
+    <div>
+      Sequence2 <input type="range" min="0" max="1" step="0.01" value="1"
+        oninput="setVolume(1, this.value)">
+    </div>
+    <div>
+      Sequence1 <input type="range" min="0" max="1" step="0.01" value="0.5"
+        oninput="setBalance(this.value)"> Sequence2
+    </div>
+
   </div>
 
   <div id="right">
@@ -41,6 +58,7 @@
 <script src="script/sequenceUI.js"></script>
 <script src="script/sequencer.js"></script>
 <script src="script/pattern.js"></script>
+<script src="script/mixer.js"></script>
 <script src="script/main.js"></script>
 </body>
 </html>
