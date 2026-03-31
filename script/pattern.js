@@ -13,51 +13,6 @@ function savePattern(seqIndex) {
   updatePatternList();
 }
 
-function updatePatternList() {
-  const list = document.getElementById("patternList");
-  list.innerHTML = "";
-
-  Object.keys(localStorage)
-    .filter(key => key.startsWith("pattern_"))
-    .sort()
-    .forEach(key => {
-
-    const name = key.replace("pattern_", "");
-    const li = document.createElement("li");
-    li.classList.toggle("selected", name === currentPatternName);
-
-    // ロードボタン
-    const loadBtn0 = document.createElement("button");
-    loadBtn0.textContent = "Load1";
-    loadBtn0.onclick = () => loadPattern(0, name);
-
-    const loadBtn1 = document.createElement("button");
-    loadBtn1.textContent = "Load2";
-    loadBtn1.onclick = () => loadPattern(1, name);
-
-    // 名前
-    const nameSpan = document.createElement("span");
-    nameSpan.textContent = name;
-    nameSpan.style.flex = "1";
-    nameSpan.style.margin = "0 8px";
-
-    // 削除ボタン
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "Delete";
-    delBtn.onclick = () => {
-      localStorage.removeItem(key);
-      updatePatternList();
-    };
-
-    li.appendChild(loadBtn0);
-    li.appendChild(loadBtn1);
-    li.appendChild(nameSpan);
-    li.appendChild(delBtn);
-
-    list.appendChild(li);
-  });
-}
-
 function loadPattern(seqIndex, name) {
   const data = localStorage.getItem("pattern_" + name);
   if (!data) return;
@@ -78,13 +33,49 @@ function clearPattern(seqIndex) {
   updateUI(seqIndex);
 }
 
-function exportPattern() {
-  const data = JSON.stringify({ patterns, tempo });
-  const blob = new Blob([data], { type: "application/json" });
+function importPatterns(file) {
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const data = JSON.parse(e.target.result);
+
+    Object.keys(data).forEach(key => {
+      localStorage.setItem(key, JSON.stringify(data[key]));
+    });
+
+    updatePatternList();
+  };
+
+  reader.readAsText(file);
+}
+
+function exportAllPatterns() {
+  const data = {};
+
+  Object.keys(localStorage)
+    .filter(key => key.startsWith("pattern_"))
+    .sort()
+    .forEach(key => {
+
+    data[key] = JSON.parse(localStorage.getItem(key));
+  });
+
+  const json = JSON.stringify(data, null, 2);
+
+  downloadJSON(json, "patterns.json");
+}
+
+function downloadJSON(content, filename) {
+  const blob = new Blob([content], {
+    type: "application/json"
+  });
+
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "pattern.json";
+  a.download = filename;
   a.click();
+
+  URL.revokeObjectURL(url);
 }

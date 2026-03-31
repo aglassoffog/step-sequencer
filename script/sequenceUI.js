@@ -8,6 +8,11 @@ function initUI(seqIndex) {
     track.forEach((_, stepIndex) => {
       const div = document.createElement("div");
       div.className = "step";
+
+      if ((stepIndex + 1) % 4 === 0) {
+        div.classList.add("group-end");
+      }
+
       div.onclick = () => {
         patterns[seqIndex][trackIndex][stepIndex] ^= 1;
         div.classList.toggle("active");
@@ -41,6 +46,4 @@ function updateUI(seqIndex) {
       cell.classList.toggle("active", isActive);
     });
   });
-
-
 }

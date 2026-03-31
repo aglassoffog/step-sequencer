@@ -11,23 +11,23 @@
 
 <div id="app">
   <div id="left">
-    <button onclick="start()">Start</button>
-    <button onclick="stop()">Stop</button>
+    <button class="button" onclick="start()">Start</button>
+    <button class="button" onclick="stop()">Stop</button>
 
     <br>
     <h3>Sequence1</h3>
     <div id="sequencer0"></div>
     <input id="patternName0" placeholder="pattern name">
-    <button onclick="savePattern(0)">Save</button>
-    <button onclick="clearPattern(0)">Clear</button>
+    <button class="button" onclick="savePattern(0)">Save</button>
+    <button class="button" onclick="clearPattern(0)">Clear</button>
 
     <br>
 
     <h3>Sequence2</h3>
     <div id="sequencer1"></div>
     <input id="patternName1" placeholder="pattern name">
-    <button onclick="savePattern(1)">Save</button>
-    <button onclick="clearPattern(1)">Clear</button>
+    <button class="button" onclick="savePattern(1)">Save</button>
+    <button class="button" onclick="clearPattern(1)">Clear</button>
 
     <br>
 
@@ -50,6 +50,14 @@
   <div id="right">
     <h3>Pattern</h3>
     <ul id="patternList"></ul>
+    <br><br>
+    <button class="button" onclick="exportAllPatterns()">Export All</button>
+    <br><br>
+    <label class="button">
+      Import
+      <input type="file" style="display:none" onchange="importPatterns(this.files[0])">
+    </label>
+    <span id="fileName">No file</span>
   </div>
 
 </div>
@@ -57,6 +65,7 @@
 <script src="script/inst.js"></script>
 <script src="script/sequenceUI.js"></script>
 <script src="script/sequencer.js"></script>
+<script src="script/patternUI.js"></script>
 <script src="script/pattern.js"></script>
 <script src="script/mixer.js"></script>
 <script src="script/main.js"></script>
