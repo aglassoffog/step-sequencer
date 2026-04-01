@@ -1,3 +1,5 @@
+let audioCtx = null;
+let isRunning = false;
 let tempo = 120;
 let steps = 16;
 let currentStep = 0;
@@ -23,6 +25,6 @@ let patterns = [[
 // patterns[1][4] = patterns[1][12] = 1;
 // patterns[2][0] = patterns[2][4] = patterns[2][8] = patterns[2][12] = 1;
 
-initAudio();
+// initAudio();
 initUI();
 updatePatternList();

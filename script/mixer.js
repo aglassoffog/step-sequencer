@@ -1,19 +1,21 @@
-let audioCtx = null;
+let masterGain;
+let mixGains;
+let seqGains;
 
-async function initAudio() {
+function initAudio() {
 
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-  const masterGain = audioCtx.createGain();
+  masterGain = audioCtx.createGain();
   masterGain.gain.value = 0.8;
   masterGain.connect(audioCtx.destination);
 
-  const mixGains = [
+  mixGains = [
     audioCtx.createGain(),
     audioCtx.createGain()
   ];
 
-  const seqGains = [
+  seqGains = [
     audioCtx.createGain(),
     audioCtx.createGain()
   ];
@@ -29,7 +31,7 @@ async function initAudio() {
   seqGains[0].connect(mixGains[0]).connect(masterGain);
   seqGains[1].connect(mixGains[1]).connect(masterGain);
 
-  await audioCtx.resume();
+  audioCtx.resume();
 }
 
 function setVolume(seqIndex, value) {
