@@ -1,30 +1,36 @@
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx = null;
 
-const masterGain = audioCtx.createGain();
-masterGain.gain.value = 0.8;
-masterGain.connect(audioCtx.destination);
+async function initAudio() {
 
-const mixGains = [
-  audioCtx.createGain(),
-  audioCtx.createGain()
-];
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-const seqGains = [
-  audioCtx.createGain(),
-  audioCtx.createGain()
-];
+  const masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.8;
+  masterGain.connect(audioCtx.destination);
 
-mixGains.forEach(g => {
-  g.gain.value = 0.5;
-});
+  const mixGains = [
+    audioCtx.createGain(),
+    audioCtx.createGain()
+  ];
 
-seqGains.forEach(g => {
-  g.gain.value = 1.0;
-});
+  const seqGains = [
+    audioCtx.createGain(),
+    audioCtx.createGain()
+  ];
 
-seqGains[0].connect(mixGains[0]).connect(masterGain);
-seqGains[1].connect(mixGains[1]).connect(masterGain);
+  mixGains.forEach(g => {
+    g.gain.value = 0.5;
+  });
 
+  seqGains.forEach(g => {
+    g.gain.value = 1.0;
+  });
+
+  seqGains[0].connect(mixGains[0]).connect(masterGain);
+  seqGains[1].connect(mixGains[1]).connect(masterGain);
+
+  await audioCtx.resume();
+}
 
 function setVolume(seqIndex, value) {
   seqGains[seqIndex].gain.value = parseFloat(value);

@@ -23,5 +23,6 @@ let patterns = [[
 // patterns[1][4] = patterns[1][12] = 1;
 // patterns[2][0] = patterns[2][4] = patterns[2][8] = patterns[2][12] = 1;
 
+initAudio();
 initUI();
 updatePatternList();

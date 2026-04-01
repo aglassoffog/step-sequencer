@@ -28,10 +28,10 @@ function scheduler() {
   }
 }
 
-async function start() {
-  if (audioCtx.state === "suspended") {
-    await audioCtx.resume();
-  }
+function start() {
+//  if (audioCtx.state === "suspended") {
+//    await audioCtx.resume();
+//  }
   currentStep = 0;
   nextNoteTime = audioCtx.currentTime;
   timerID = setInterval(scheduler, lookahead);
