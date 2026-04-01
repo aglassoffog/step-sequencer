@@ -42,3 +42,14 @@ function setBalance(value) {
   mixGains[0].gain.value = 1 - parseFloat(value);
   mixGains[1].gain.value = parseFloat(value);
 }
+
+function openMixer() {
+  const popup = document.getElementById("mixerPopup");
+  popup.classList.remove("hidden");
+}
+
+mixerPopup.addEventListener("pointerdown", e => {
+  if (e.target === mixerPopup) {
+    mixerPopup.classList.add("hidden");
+  }
+});

@@ -60,7 +60,6 @@ function highlightStep(step) {
   const rows = document.querySelectorAll(".row0, .row1");
 
   rows.forEach(row => {
-    // [...row.children]
     row.querySelectorAll(":scope > .step").forEach((cell, i) => {
       cell.classList.toggle("playing", i === step);
     });

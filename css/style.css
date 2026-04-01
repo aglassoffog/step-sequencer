@@ -48,9 +48,7 @@ input {
   background: #555;
 }
 
-.group-end {
-  margin-right: 12px;
-}
+
 
 ul {
   padding-inline-start: 10px;
@@ -104,8 +102,41 @@ ul {
 }
 
 #velocitySliders input {
-  writing-mode: bt-lr; /* or vertical */
-  -webkit-appearance: slider-vertical;
+  writing-mode: vertical-lr;
+  direction: rtl;
   width: 20px;
   height: 120px;
+}
+
+#mixerSliders {
+  display: flex;
+  gap: 160px;
+  align-items: flex-end;
+}
+
+.mixer-channel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 縦スライダー（新方式） */
+.mixer-channel input {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 30px;
+  height: 150px;
+}
+
+.mixer-channel span {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.mixer-balance {
+  width: 90%;
+}
+
+.group-end {
+  margin-right: 12px;
 }
