@@ -28,7 +28,7 @@ function scheduler() {
   }
 }
 
-async function start() {
+playBtn.addEventListener("pointerdown", async () => {
   if (!isRunning) {
     await initAudio();
     isRunning = true;
@@ -43,4 +43,4 @@ async function start() {
   isPlaying = !isPlaying;
   playBtn.classList.toggle("playing", isPlaying);
   playBtn.textContent = isPlaying ? "Stop" : "Start";
-}
+});
