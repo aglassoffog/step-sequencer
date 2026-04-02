@@ -40,6 +40,7 @@ function openVelocity(seqIndex, trackIndex) {
 
 velocityPopup.addEventListener("pointerdown", e => {
   if (e.target === velocityPopup) {
+    e.stopPropagation();
     velocityPopup.classList.add("hidden");
   }
 });
