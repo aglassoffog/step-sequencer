@@ -30,8 +30,18 @@ body { font-family: sans-serif; background: #111; color: #fff; font-size:12px;}
   cursor: pointer;
 }
 
+.button:hover {
+  background: #555;
+}
+
 .ctl-btn {
   font-size: 16px;
+}
+
+.track {
+  margin: 2px;
+  padding: 5px 10px;
+  flex: 1;
 }
 
 .seq1 {
@@ -82,9 +92,7 @@ input {
 
 
 
-.button:hover {
-  background: #555;
-}
+
 
 
 .row0 { display: flex; margin: 10px 0; }

@@ -1,11 +1,14 @@
 function loadSound(seqIndex, trackIndex, typeIndex) {
-  // const patternName = document.getElementById("patternName"+(seqIndex+1));
-  // patternName.textContent = name;
+  const rows = document.querySelectorAll(".row"+seqIndex);
+
+  rows.forEach((row, i) => {
+    if (i === trackIndex) {
+      const span = row.querySelector(":scope > span");
+      span.textContent = soundNames[typeIndex];
+    }
+  });
 
   sounds[seqIndex][trackIndex].type = typeIndex;
-
-  // updateUI(seqIndex);
-  // updatePatternList();
 }
 
 function playSound(seqIndex, time, velocity, typeIndex) {
@@ -23,16 +26,3 @@ function playSound(seqIndex, time, velocity, typeIndex) {
 
 
 
-function saveSound(name, type) {
-
-  const data = {
-    type: type,
-    setting: ""
-  };
-
-  localStorage.setItem("sound_" + name, JSON.stringify(data));
-  updateSoundList();
-}
-
-// saveBtn1.addEventListener("pointerdown", () => {savePattern(0);});
-// saveBtn2.addEventListener("pointerdown", () => {savePattern(1);});

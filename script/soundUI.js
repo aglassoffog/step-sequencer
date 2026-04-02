@@ -19,7 +19,7 @@ function openSound(typeIndex) {
     const br = document.createElement("br");
     const seqTitle = document.createElement("span");
     seqTitle.textContent = "Sequence"+(i+1);
-    seqTitle.className = "seq"+(i+1);
+    seqTitle.classList.add("seq-title", "seq"+(i+1));
     control.appendChild(seqTitle);
 
     for(let k=0;k<3;k++){
