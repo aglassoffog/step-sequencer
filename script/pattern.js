@@ -1,18 +1,5 @@
 let currentPatternName = "";
 
-function savePattern(seqIndex) {
-  const name = document.getElementById("patternName" + seqIndex).value.trim();
-  if (!name) return alert("名前を入れて");
-
-  const data = {
-    patterns: patterns[seqIndex],
-    tempo: tempo
-  };
-
-  localStorage.setItem("pattern_" + name, JSON.stringify(data));
-  updatePatternList();
-}
-
 function loadPattern(seqIndex, name) {
   const data = localStorage.getItem("pattern_" + name);
   if (!data) return;
@@ -27,10 +14,28 @@ function loadPattern(seqIndex, name) {
   updatePatternList();
 }
 
+function savePattern(seqIndex) {
+  const name = document.getElementById("patternName"+(seqIndex+1)).value.trim();
+  if (!name) return alert("名前を入れて");
+
+  const data = {
+    patterns: patterns[seqIndex],
+    tempo: tempo
+  };
+
+  localStorage.setItem("pattern_" + name, JSON.stringify(data));
+  updatePatternList();
+}
+
 function clearPattern(seqIndex) {
   patterns[seqIndex].forEach(track => track.fill(0));
   updateUI(seqIndex);
 }
+
+saveBtn1.addEventListener("pointerdown", () => {savePattern(0);});
+saveBtn2.addEventListener("pointerdown", () => {savePattern(1);});
+clrBtn1.addEventListener("pointerdown", () => {clearPattern(0);});
+clrBtn2.addEventListener("pointerdown", () => {clearPattern(1);});
 
 function importPatterns(file) {
   const reader = new FileReader();

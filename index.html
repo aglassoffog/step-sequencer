@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Step Sequencer</title>
+  <title>2 Pairs Step Sequencer</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>Step Sequencer</h2>
+<h2>2 Pairs Step Sequencer</h2>
 
 <div id="app">
   <div id="left">
     <button id="playBtn" class="button ctl-btn">Start</button>
-    <button class="button ctl-btn" onclick="openMixer()">Mixer</button>
+    <button id="mixerBtn" class="button ctl-btn">Mixer</button>
 
     <br><br>
 
     <span class="seq-title seq1">Sequence1</span>
-    <input id="patternName0" placeholder="pattern name">
-    <button class="button seq1" onclick="savePattern(0)">Save</button>
-    <button class="button seq1" onclick="clearPattern(0)">Clear</button>
-    <div id="sequencer0"></div>
+    <input id="patternName1" placeholder="pattern name">
+    <button id="saveBtn1" class="button seq1">Save</button>
+    <button id="clrBtn1" class="button seq1">Clear</button>
+    <div id="sequencer1"></div>
 
     <br>
 
-    <span class="seq-title seq2">Sequence2</h3>
-    <input id="patternName1" placeholder="pattern name">
-    <button class="button seq2" onclick="savePattern(1)">Save</button>
-    <button class="button seq2" onclick="clearPattern(1)">Clear</button>
-    <div id="sequencer1"></div>
+    <span class="seq-title seq2">Sequence2</span>
+    <input id="patternName2" placeholder="pattern name">
+    <button id="saveBtn2" class="button seq2">Save</button>
+    <button id="clrBtn2" class="button seq2">Clear</button>
+    <div id="sequencer2"></div>
 
   </div>
 

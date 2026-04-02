@@ -1,6 +1,6 @@
 function initUI() {
   patterns.forEach((pattern, seqIndex) => {
-    const container = document.getElementById("sequencer" + seqIndex);
+    const container = document.getElementById("sequencer"+(seqIndex+1));
 
     pattern.forEach((track, trackIndex) => {
       const row = document.createElement("div");

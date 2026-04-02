@@ -43,10 +43,10 @@ function setBalance(value) {
   mixGains[1].gain.value = parseFloat(value);
 }
 
-function openMixer() {
+mixerBtn.addEventListener("pointerdown", e => {
   const popup = document.getElementById("mixerPopup");
   popup.classList.remove("hidden");
-}
+});
 
 mixerPopup.addEventListener("pointerdown", e => {
   if (e.target === mixerPopup) {
