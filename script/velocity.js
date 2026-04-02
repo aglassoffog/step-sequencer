@@ -1,11 +1,13 @@
 function openVelocity(seqIndex, trackIndex) {
   const popup = document.getElementById("stepPopup");
-  const sliders = document.getElementById("stepSliders");
   const subTitle = document.getElementById("subTitle");
+  const sliders = document.getElementById("stepSliders");
+  const control = document.getElementById("stepControl");
 
   popup.classList.remove("hidden");
-  sliders.innerHTML = "";
   subTitle.innerHTML = "";
+  sliders.innerHTML = "";
+  control.innerHTML = "";
 
   const popTitle = document.getElementById("popTitle");
   popTitle.textContent = "Velocity";
