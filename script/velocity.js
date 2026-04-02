@@ -9,8 +9,13 @@ function openVelocity(seqIndex, trackIndex) {
   popup.classList.remove("hidden");
   sliders.innerHTML = "";
 
-  document.getElementById("velTitle").textContent =
-    "Sequence" + (seqIndex+1) + " Track " + (trackIndex+1);
+  const seqTitle = document.getElementById("seqTitle");
+  seqTitle.textContent = "Sequence" + (seqIndex+1);
+  seqTitle.className = "seq" + (seqIndex+1);
+
+  const trackTitle = document.getElementById("trackTitle");
+  trackTitle.textContent = " Track " + (trackIndex+1);
+  trackTitle.className = "seq" + (seqIndex+1);
 
   patterns[seqIndex][trackIndex].forEach((step, stepIndex) => {
     const input = document.createElement("input");

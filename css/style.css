@@ -17,22 +17,8 @@ body { font-family: sans-serif; background: #111; color: #fff; font-size:12px;}
   overflow-y: auto;
 }
 
-.row0 { display: flex; margin: 10px 0; }
-.row1 { display: flex; margin: 10px 0; }
-.step {
-  width: 24px; height: 24px; margin: 2px;
-  background: #333; cursor: pointer;
-}
-.step.active { background: #0f0; }
-.step.playing { outline: 2px solid yellow; }
-
-input {
-  width: 50%;
-  margin-bottom: 5px;
-  padding: 5px;
-  background: #222;
-  color: white;
-  border: 1px solid #444;
+.seq-title {
+  font-weight: bold;
 }
 
 .button {
@@ -44,9 +30,46 @@ input {
   cursor: pointer;
 }
 
+.ctl-btn {
+  font-size: 16px;
+}
+
+.seq1 {
+  color: #4da6ff;
+}
+.seq2 {
+  color: #ff4d4d;
+}
+.playing {
+  color: #0ff;
+}
+
+input {
+  width: 50%;
+  margin-bottom: 5px;
+  padding: 5px;
+  background: #222;
+  color: white;
+  border: 1px solid #444;
+}
+
+
+
 .button:hover {
   background: #555;
 }
+
+
+.row0 { display: flex; margin: 10px 0; }
+.row1 { display: flex; margin: 10px 0; }
+.step {
+  width: 24px; height: 24px; margin: 2px;
+  background: #333; cursor: pointer;
+}
+.step.active { background: #0f0; }
+.step.playing { outline: 2px solid yellow; }
+
+
 
 
 

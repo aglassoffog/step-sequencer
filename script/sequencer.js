@@ -29,18 +29,18 @@ function scheduler() {
 }
 
 async function start() {
-//  if (audioCtx.state === "suspended") {
-//    await audioCtx.resume();
-//  }
-   if (!isRunning) {
+  if (!isRunning) {
     await initAudio();
     isRunning = true;
   }
-  currentStep = 0;
-  nextNoteTime = audioCtx.currentTime;
-  timerID = setInterval(scheduler, lookahead);
-}
-
-function stop() {
-  clearInterval(timerID);
+  if (!isPlaying) {
+    currentStep = 0;
+    nextNoteTime = audioCtx.currentTime;
+    timerID = setInterval(scheduler, lookahead);
+  } else {
+    clearInterval(timerID);
+  }
+  isPlaying = !isPlaying;
+  playBtn.classList.toggle("playing", isPlaying);
+  playBtn.textContent = isPlaying ? "Stop" : "Start";
 }

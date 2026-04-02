@@ -8,7 +8,7 @@ function initUI() {
 
       const velBtn = document.createElement("button");
       velBtn.textContent = "Vel";
-      velBtn.classList.add("button", "group-end");
+      velBtn.classList.add("button", "seq"+(seqIndex+1), "group-end");
       velBtn.onclick = () => openVelocity(seqIndex, trackIndex);
 
       row.appendChild(velBtn);

@@ -1,5 +1,6 @@
 let audioCtx = null;
 let isRunning = false;
+let isPlaying = false;
 let tempo = 120;
 let steps = 16;
 let currentStep = 0;
