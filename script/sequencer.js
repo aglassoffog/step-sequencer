@@ -1,3 +1,6 @@
+let sequenceMode = 0;
+let currentSequence = 0;
+
 // ステップ長（16分音符）
 function stepDuration() {
   return (60 / tempo) / 4;
@@ -25,10 +28,44 @@ function nextNote() {
   currentStep = (currentStep + 1) % steps;
 }
 
+function selectPattern() {
+  if (currentStep === 0) {
+    if (sequenceMode === 0) {
+
+    } else if (sequenceMode === 1) {
+      if (currentPatternList.length <= currentPattern) {
+        currentPattern = 0;
+      }
+      loadPattern(0, currentPatternList[currentPattern]); 
+      currentPattern++;
+    } else if (sequenceMode === 2) {
+      if (currentPatternList.length <= currentPattern) {
+        currentPattern = 0;
+      }
+      loadPattern(1, currentPatternList[currentPattern]); 
+      currentPattern++;
+    } else if (sequenceMode === 3) {
+      if (currentPatternList.length <= currentPattern) {
+        currentPattern = 0;
+      }
+      loadPattern(currentSequence, currentPatternList[currentPattern]); 
+      currentPattern++;
+      currentSequence = currentSequence ^ 1;
+    } else if (sequenceMode === 4) {
+      loadPattern(0, currentPatternList[Math.floor(Math.random() * currentPatternList.length)]); 
+    } else if (sequenceMode === 5) {
+      loadPattern(1, currentPatternList[Math.floor(Math.random() * currentPatternList.length)]); 
+    } else if (sequenceMode === 6) {
+      loadPattern(currentSequence, currentPatternList[Math.floor(Math.random() * currentPatternList.length)]); 
+      currentSequence = currentSequence ^ 1;
+    }    
+  }
+}
+
 // スケジューラ
 function scheduler() {
   while (nextNoteTime < audioCtx.currentTime + scheduleAheadTime) {
-    // パターン選択
+    selectPattern();
     scheduleStep(currentStep, nextNoteTime);
     nextNote();
   }

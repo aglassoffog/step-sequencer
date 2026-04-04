@@ -43,7 +43,7 @@ function openSound(typeIndex) {
   }
 }
 
-document.querySelectorAll(".soundSetting").forEach((btn, i) => {
-  console.log(btn);
+const soundSetting = document.querySelectorAll(".soundSetting");
+soundSetting.forEach((btn, i) => {
   btn.addEventListener("pointerdown", () => {openSound(i);});
 });

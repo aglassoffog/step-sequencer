@@ -16,8 +16,11 @@ function openSequence() {
   container.className = "sequence-mode";
 
   const options = [
-    "Fix", "Sequence1 in order", "Sequence2 in order",
-    "alternate"
+    "Fix",
+    "Sequence1 in order", "Sequence2 in order",
+    "alternate in order",
+    "Sequence1 in random", "Sequence2 in random",
+    "alternate in randowm"
   ];
 
   options.forEach((text, i) => {

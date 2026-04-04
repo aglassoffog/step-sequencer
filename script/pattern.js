@@ -12,7 +12,6 @@ function loadPattern(seqIndex, name) {
   tempo = parsed.tempo || 120;
 
   updateUI(seqIndex);
-  updatePatternList();
 }
 
 function savePattern(seqIndex) {

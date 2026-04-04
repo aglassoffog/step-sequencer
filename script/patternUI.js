@@ -1,13 +1,21 @@
+let keyword = "";
+let timer;
+let currentPatternList = [];
+let currentPattern = 0;
+const list = document.getElementById("patternList");
+
 function updatePatternList() {
-  const list = document.getElementById("patternList");
   list.innerHTML = "";
+  currentPatternList = [];
+  currentPattern = 0;
 
   Object.keys(localStorage)
-    .filter(key => key.startsWith("pattern_"))
+    .filter(key => key.startsWith("pattern_" + keyword))
     .sort()
     .forEach(key => {
 
     const name = key.replace("pattern_", "");
+    currentPatternList.push(name);
     const li = document.createElement("li");
 
     const loadBtn0 = document.createElement("button");
@@ -38,4 +46,16 @@ function updatePatternList() {
 
     list.appendChild(li);
   });
+
+  console.log(currentPatternList);
 }
+
+const searchInput = document.getElementById("patternSearch");
+searchInput.addEventListener("input", () => {
+  clearTimeout(timer);
+
+  timer = setTimeout(() => {
+    keyword = searchInput.value;
+    updatePatternList();
+  }, 100);
+});
