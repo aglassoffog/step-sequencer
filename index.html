@@ -35,7 +35,7 @@
     <div id="tabContents">
 
       <div id="patternTab" class="tabContent">
-        <h4 class="ptn">Pattern</h4>
+        <br>
         <input id="patternSearch" type="text" placeholder="search pattern..." />
         <ul id="patternList"></ul>
         <br>
@@ -44,21 +44,30 @@
           Import
           <input type="file" class="hidden" onchange="importPatterns(this.files[0])">
         </label>
-        <span id="fileName">No file</span>
+        <span id="fileName" class="track">No file</span>
       </div>
 
       <div id="soundTab" class="tabContent" style="display:none;">
-        <h4 class="snd">Sound</h4>
-        <div id="soundSettings"></div>      
+        <br>
+        <div id="soundSettings"></div>
+
       </div>
 
       <div id="moveTab" class="tabContent" style="display:none;">
-        <h4 class="snd">Move</h4>
+        <br>
         <div id="moveControl"></div>
+        <div class="form">
+          <div class="form-row">
+            <label class="form-label seq1">Sequence1</label>
+            <div>
+              <button id="move-seq1-left" class="button">Left</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="mixerTab" class="tabContent" style="display:none;">
-        <h4 class="snd">Mixer</h4>
+        <br>
         <div id="mixerSliders">
           <div class="mixer-channel">
             <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, this.value)">
@@ -88,18 +97,35 @@
   </div>
 </div>
 
+<div id="soundPopup" class="popup hidden">
+  <div class="popup-content">
+    <h3 id="soundTitle"></h3>
+    <div class="form">
+      <div class="form-row">
+        <label class="form-label seq1">Sequence1</label>
+        <div id="sound-load1" class="sequence-mode"></div>
+      </div>
+      <div class="form-row">
+        <label class="form-label seq2">Sequence2</label>
+        <div id="sound-load2" class="sequence-mode"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="settingPopup" class="popup hidden">
   <div class="popup-content">
     <h3>Setting</h3>
     <div class="form">
       <div class="form-row">
-        <label class="form-label">tempo</label>
+        <label class="form-label stg">tempo</label>
         <div>
-          <input type="range" min="40" max="200" step="1"><span>120</span>
+          <input id="tempo-bar" type="range" min="40" max="200" step="1">
+          <span id="tempo-span">120</span>
         </div>
       </div>
       <div class="form-row">
-        <label class="form-label">sequence mode</label>
+        <label class="form-label stg">sequence mode</label>
         <div id="sequence-mode" class="sequence-mode"></div>
       </div>
     </div>

@@ -8,27 +8,21 @@ const soundNames = [
 ]
 
 function openSound(typeIndex) {
-  const popup = document.getElementById("stepPopup");
-  const subTitle = document.getElementById("subTitle");
-  const sliders = document.getElementById("stepSliders");
-  const control = document.getElementById("stepControl");
-
+  const popup = document.getElementById("soundPopup");
   popup.classList.remove("hidden");
-  subTitle.innerHTML = "";
-  sliders.innerHTML = "";
-  control.innerHTML = "";
 
-  const popTitle = document.getElementById("popTitle");
-  popTitle.textContent = soundNames[typeIndex];
+  const title = document.getElementById("soundTitle");
+  title.textContent = soundNames[typeIndex];
 
   for(let i=0;i<2;i++){
-    const div = document.createElement("div");
-    div.className = "sound-load";
-    const br = document.createElement("br");
-    const seqTitle = document.createElement("span");
-    seqTitle.textContent = "Sequence"+(i+1);
-    seqTitle.classList.add("seq-title", "seq"+(i+1));
-    control.appendChild(seqTitle);
+    // const div = document.createElement("div");
+    // div.className = "sound-load";
+    // const br = document.createElement("br");
+    // const seqTitle = document.createElement("span");
+    // seqTitle.textContent = "Sequence"+(i+1);
+    // seqTitle.classList.add("seq-title", "seq"+(i+1));
+    // control.appendChild(seqTitle);
+    const div = document.getElementById("sound-load"+(i+1));
 
     for(let k=0;k<3;k++){
       const loadBtn = document.createElement("button");
@@ -38,8 +32,8 @@ function openSound(typeIndex) {
       div.appendChild(loadBtn);
     }
 
-    control.appendChild(div);
-    control.appendChild(br);
+    // control.appendChild(div);
+    // control.appendChild(br);
   }
 }
 
@@ -56,4 +50,10 @@ soundNames.forEach((name, i) => {
       const br = document.createElement("br");      
       soundSettings.appendChild(br);
     }
+});
+
+soundPopup.addEventListener("pointerdown", e => {
+  if (e.target === soundPopup) {
+    soundPopup.classList.add("hidden");
+  }
 });

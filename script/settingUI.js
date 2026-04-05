@@ -46,7 +46,15 @@ settingBtn.addEventListener("pointerdown", () => {
   row2.appendChild(label2);
 */
 
+  const tempoSpan = document.getElementById("tempo-span");
+  const tempoBar = document.getElementById("tempo-bar");
+  tempoBar.oninput = () => {
+    tempo = parseInt(tempoBar.value);
+    tempoSpan.textContent = tempo;
+  };
+
   const container2 = document.getElementById("sequence-mode");
+  container2.innerHTML = "";
   container2.className = "sequence-mode";
 
   const options = [

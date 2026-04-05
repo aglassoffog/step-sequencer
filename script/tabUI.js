@@ -1,8 +1,8 @@
 const tabNames = [
   "Pattern",
-  "Sound",
+  "Mixer",
   "Move",
-  "Mixer"
+  "Sound"
 ]
 const tab = document.getElementById("tabs");
 tabNames.forEach(name => {
