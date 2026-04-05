@@ -1,18 +1,21 @@
 let keyword = "";
 let timer;
 let currentPatternList = [];
-let currentPattern = 0;
+let selectedPattern = [
+  {patternIndex: null, active: false},
+  {patternIndex: null, active: false}
+];
+
 const list = document.getElementById("patternList");
 
 function updatePatternList() {
   list.innerHTML = "";
   currentPatternList = [];
-  currentPattern = 0;
 
   Object.keys(localStorage)
     .filter(key => key.startsWith("pattern_" + keyword))
     .sort()
-    .forEach(key => {
+    .forEach((key, i) => {
 
     const name = key.replace("pattern_", "");
     currentPatternList.push(name);
@@ -21,14 +24,24 @@ function updatePatternList() {
     const loadBtn0 = document.createElement("button");
     loadBtn0.classList.add("button", "seq1");
     loadBtn0.textContent = "Load1";
-    loadBtn0.onclick = () => loadPattern(0, name);
+    loadBtn0.onclick = () => {
+      loadPattern(0, name, i);
+    }
 
     const loadBtn1 = document.createElement("button");
     loadBtn1.classList.add("button", "seq2");
     loadBtn1.textContent = "Load2";
-    loadBtn1.onclick = () => loadPattern(1, name);
+    loadBtn1.onclick = () => {
+      loadPattern(1, name, i);
+    }
 
     const nameSpan = document.createElement("span");
+    if (i === selectedPattern[0].patternIndex && selectedPattern[0].active) {
+      nameSpan.className = "seq1";
+    }
+    if (i === selectedPattern[1].patternIndex && selectedPattern[1].active) {
+      nameSpan.className = "seq2";
+    }
     nameSpan.textContent = name;
 
     const delBtn = document.createElement("button");
@@ -46,8 +59,6 @@ function updatePatternList() {
 
     list.appendChild(li);
   });
-
-  console.log(currentPatternList);
 }
 
 const searchInput = document.getElementById("patternSearch");

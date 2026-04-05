@@ -1,5 +1,6 @@
 let sequenceMode = 0;
 let currentSequence = 0;
+let currentPattern = 0;
 
 // ステップ長（16分音符）
 function stepDuration() {
@@ -23,7 +24,7 @@ function scheduleStep(step, time) {
 }
 
 // 次へ
-function nextNote() {
+function nextStep() {
   nextNoteTime += stepDuration();
   currentStep = (currentStep + 1) % steps;
 }
@@ -36,27 +37,30 @@ function selectPattern() {
       if (currentPatternList.length <= currentPattern) {
         currentPattern = 0;
       }
-      loadPattern(0, currentPatternList[currentPattern]); 
+      loadPattern(0, currentPatternList[currentPattern], currentPattern); 
       currentPattern++;
     } else if (sequenceMode === 2) {
       if (currentPatternList.length <= currentPattern) {
         currentPattern = 0;
       }
-      loadPattern(1, currentPatternList[currentPattern]); 
+      loadPattern(1, currentPatternList[currentPattern], currentPattern); 
       currentPattern++;
     } else if (sequenceMode === 3) {
       if (currentPatternList.length <= currentPattern) {
         currentPattern = 0;
       }
-      loadPattern(currentSequence, currentPatternList[currentPattern]); 
+      loadPattern(currentSequence, currentPatternList[currentPattern], currentPattern); 
       currentPattern++;
       currentSequence = currentSequence ^ 1;
     } else if (sequenceMode === 4) {
-      loadPattern(0, currentPatternList[Math.floor(Math.random() * currentPatternList.length)]); 
+      currentPattern = Math.floor(Math.random() * currentPatternList.length);
+      loadPattern(0, currentPatternList[currentPattern], currentPattern);
     } else if (sequenceMode === 5) {
-      loadPattern(1, currentPatternList[Math.floor(Math.random() * currentPatternList.length)]); 
+      currentPattern = Math.floor(Math.random() * currentPatternList.length);
+      loadPattern(1, currentPatternList[currentPattern], currentPattern); 
     } else if (sequenceMode === 6) {
-      loadPattern(currentSequence, currentPatternList[Math.floor(Math.random() * currentPatternList.length)]); 
+      currentPattern = Math.floor(Math.random() * currentPatternList.length);
+      loadPattern(currentSequence, currentPatternList[currentPattern], currentPattern); 
       currentSequence = currentSequence ^ 1;
     }    
   }
@@ -67,7 +71,7 @@ function scheduler() {
   while (nextNoteTime < audioCtx.currentTime + scheduleAheadTime) {
     selectPattern();
     scheduleStep(currentStep, nextNoteTime);
-    nextNote();
+    nextStep();
   }
 }
 
@@ -78,6 +82,8 @@ playBtn.addEventListener("pointerdown", async () => {
   }
   if (!isPlaying) {
     currentStep = 0;
+    currentSequence = 0;
+    currentPattern = 0;
     nextNoteTime = audioCtx.currentTime;
     timerID = setInterval(scheduler, lookahead);
   } else {

@@ -1,4 +1,4 @@
-function loadPattern(seqIndex, name) {
+function loadPattern(seqIndex, name, patternIndex) {
   const data = localStorage.getItem("pattern_" + name);
   if (!data) return;
 
@@ -11,7 +11,16 @@ function loadPattern(seqIndex, name) {
     ...(parsed.sounds || [{type: 0},{type: 1},{type: 2}]));
   tempo = parsed.tempo || 120;
 
+  selectedPattern[seqIndex].patternIndex = patternIndex;
+  if (selectedPattern[0].patternIndex === selectedPattern[1].patternIndex) {
+    selectedPattern[seqIndex^1].active = false;
+  } else {
+    selectedPattern[0].active = true;
+    selectedPattern[1].active = true;
+  }
+  
   updateUI(seqIndex);
+  updatePatternList();
 }
 
 function savePattern(seqIndex) {
