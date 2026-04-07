@@ -24,37 +24,26 @@ function upShift(pattern, index) {
 
   if(index == null) {
     pattern.splice(0, 3, ...patternShift);
-  } else if (index === 0) {
+  } else {
     for(let i=0;i<3;i++){
-      pattern[i].splice(0, 4, ...patternShift[i].splice(0, 4));
-    }
-  } else if (index === 1) {
-    for(let i=0;i<3;i++){
-      pattern[i].splice(4, 4, ...patternShift[i].splice(4, 4));
+      pattern[i].splice(index*4, 4, ...patternShift[i].splice(index*4, 4));
     }
   }
 }
 
 function upShiftAll(index) {
-  const pattern0 = structuredClone(patterns[0]);
-  const pattern1 = structuredClone(patterns[1]);
+  const patternsShift = structuredClone(patterns);
 
-  pattern0.push(pattern1.shift());
-  pattern1.push(pattern0.shift());
+  patternsShift[0].push(patternsShift[1].shift());
+  patternsShift[1].push(patternsShift[0].shift());
 
   if(index == null) {
-    patterns[0].splice(0, 3, ...pattern0);
-    patterns[1].splice(0, 3, ...pattern1);
-  } else if (index === 0) {
+    patterns[0].splice(0, 3, ...patternsShift[0]);
+    patterns[1].splice(0, 3, ...patternsShift[1]);
+  } else {
     for(let i=0;i<3;i++){
-      patterns[0][i].splice(0, 4, ...pattern0[i].splice(0, 4));
-      patterns[1][i].splice(0, 4, ...pattern1[i].splice(0, 4));
-    }
-  } else if (index === 1) {
-    for(let i=0;i<3;i++){
-      patterns[0][i].splice(4, 4, ...pattern0[i].splice(4, 4));
-      patterns[1][i].splice(4, 4, ...pattern1[i].splice(4, 4));
+      patterns[0][i].splice(index*4, 4, ...patternsShift[0][i].splice(index*4, 4));
+      patterns[1][i].splice(index*4, 4, ...patternsShift[1][i].splice(index*4, 4));
     }
   }
-
 }

@@ -34,10 +34,10 @@ function initShiftUI() {
       div.appendChild(br);
     });
     Object.keys(options2).forEach(key => {
-      for(let k=0;k<3;k++){
+      for(let k=0;k<5;k++){
         const button = document.createElement("button");
         button.className = "button";
-        button.textContent = (k > 0) ? key.slice(0, 1) + k : key;
+        button.textContent = (k > 0) ? key.slice(0, 1) + k*4 : key;
         button.onclick = () => {
           if (i === 2) {
             options2[key][1]((k > 0) ? k-1 : null);

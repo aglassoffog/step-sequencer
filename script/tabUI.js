@@ -1,7 +1,7 @@
 const tabNames = [
   "Pattern",
   "Mixer",
-  "Move",
+  "Shift",
   "Sound"
 ]
 const tab = document.getElementById("tabs");
