@@ -8,7 +8,8 @@ const soundNames = [
   "Bass",
   "HiHat",
   "OpHat",
-  "Crash"
+  "Crash",
+  "Noise2"
 ]
 
 function openSound(typeIndex) {

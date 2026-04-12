@@ -33,6 +33,8 @@ function playSound(dest, time, velocity, typeIndex) {
     playOpenHat(dest, time, velocity);
   } else if (typeIndex === 9) {
     playCrash(dest, time, velocity);
+  } else if (typeIndex === 10) {
+    playNoise2(dest, time, velocity);
   }
 }
 
@@ -103,7 +105,7 @@ function playNoise(dest, time, velocity, pitchVal) {
   filter.frequency.exponentialRampToValueAtTime(1000, time + 0.3);
 
   gain.gain.setValueAtTime(velocity, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + 0.4);
 
   osc.connect(filter).connect(gain).connect(dest);
   osc.start(time);
@@ -130,7 +132,7 @@ function playCrystal(dest, time, velocity, pitchVal) {
   crystalGain.connect(dest);
 
   crystalGain.gain.setValueAtTime(0.4 * velocity, time);
-  crystalGain.gain.exponentialRampToValueAtTime(0.001, time + 1.5);
+  crystalGain.gain.exponentialRampToValueAtTime(0.01, time + 1.5);
 
   carrierOsc.start(time);
   modOsc.start(time);
@@ -149,7 +151,7 @@ function playBrush(dest, time, velocity) {
   bursts.forEach((offset, i) => {
     const t = time + offset;
     gain.gain.setValueAtTime(velocity * 0.8, t);
-    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+    gain.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
   });
 
   noise.connect(gain);
@@ -168,7 +170,7 @@ function playBass(dest, time, velocity) {
 
   gain.gain.setValueAtTime(0, time);
   gain.gain.linearRampToValueAtTime(0.5 * velocity, time + 0.01);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + 0.3);
 
   osc.connect(gain).connect(dest);
   osc.start(time);
@@ -188,7 +190,7 @@ function playHiHat(dest, time, velocity) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0.4 * velocity, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
 
   noise.connect(band1).connect(gain);
   noise.connect(band2).connect(gain);
@@ -212,7 +214,7 @@ function playOpenHat(dest, time, velocity) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0.4 * velocity, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + 0.4);
 
   noise.connect(band1).connect(gain);
   noise.connect(band2).connect(gain);
@@ -236,7 +238,7 @@ function playCrash(dest, time, velocity) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0.4 * velocity, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 2);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + 2);
 
   noise.connect(band1).connect(gain);
   noise.connect(band2).connect(gain);
@@ -245,4 +247,32 @@ function playCrash(dest, time, velocity) {
 
   noise.start(time);
   noise.stop(time + 2);
+}
+
+function playNoise2(dest, time, velocity) {
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = noiseBuffer;
+
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.Q.value = 20;
+  const base = 2000;
+  const range = 6000;
+  const freq = base + Math.random() * range;
+
+  filter.frequency.setValueAtTime(100, time);
+  filter.frequency.exponentialRampToValueAtTime(freq, time + 0.05);
+  filter.frequency.exponentialRampToValueAtTime(100, time + 0.4);
+
+  const shaper = audioCtx.createWaveShaper();
+  shaper.curve = makeDistortionCurve(10);
+  shaper.oversample = "4x";
+
+  const gain = audioCtx.createGain();
+  gain.gain.setValueAtTime(0.5 * velocity, time);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + 0.4);
+
+  noise.connect(filter).connect(shaper).connect(gain).connect(dest);
+  noise.start(time);
+  noise.stop(time + 0.4);
 }
