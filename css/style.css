@@ -154,7 +154,7 @@ li span {
   writing-mode: vertical-lr;
   direction: rtl;
   width: 30px;
-  height: 130px;
+  height: 200px;
 }
 
 
@@ -220,6 +220,10 @@ li span {
 }
 .form-label {
   font-weight: bold;
+}
+.form-item {
+  display: flex;
+  justify-content: center;
 }
 
 
