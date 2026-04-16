@@ -1,16 +1,3 @@
-function loadSound(seqIndex, trackIndex, typeIndex) {
-  const rows = document.querySelectorAll(".row"+seqIndex);
-
-  rows.forEach((row, i) => {
-    if (i === trackIndex) {
-      const span = row.querySelector(":scope > span");
-      span.textContent = soundNames[typeIndex];
-    }
-  });
-
-  sounds[seqIndex][trackIndex].type = typeIndex;
-}
-
 function playSound(dest, time, velocity, typeIndex) {
 
   if (typeIndex === 0) {

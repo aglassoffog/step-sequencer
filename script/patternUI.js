@@ -36,13 +36,18 @@ function updatePatternList() {
     }
 
     const nameSpan = document.createElement("span");
-    if (i === selectedPattern[0].patternIndex && selectedPattern[0].active) {
+    nameSpan.textContent = name;
+    if (i === selectedPattern[0].patternIndex) {
       nameSpan.className = "seq1";
     }
-    if (i === selectedPattern[1].patternIndex && selectedPattern[1].active) {
+    if (i === selectedPattern[1].patternIndex) {
       nameSpan.className = "seq2";
+      if (selectedPattern[0].patternIndex === selectedPattern[1].patternIndex) {
+        if (selectedPattern[0].active) {
+          nameSpan.className = "seq1";
+        }
+      }
     }
-    nameSpan.textContent = name;
 
     const delBtn = document.createElement("button");
     delBtn.classList.add("button");

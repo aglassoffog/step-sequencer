@@ -138,7 +138,14 @@
 
       <div id="soundTab" class="tabContent" style="display:none;">
         <br>
-        <div id="soundSettings"></div>
+        <ul id="soundList"></ul>
+        <br>
+        <button class="button" onclick="exportAllSounds()">Export All</button>
+        <label class="button">
+          Import
+          <input type="file" class="hidden" onchange="importSounds(this.files[0])">
+        </label>
+        <span id="fileName" class="radio-span">No file</span>
       </div>
 
     </div>
@@ -156,6 +163,29 @@
 </div>
 
 <div id="soundPopup" class="popup hidden">
+  <div class="popup-content">
+    <span id="soundTitle" class="form-label"></span>
+    <input id="soundName" type="text" placeholder="sound name">
+    <button id="soundSaveBtn" class="button">Save</button>
+    <br><br>
+    <div class="form">
+      <div id="sound-load1" class="form-row">
+        <label class="form-label"></label>
+        <div class="sound-load"></div>
+      </div>
+      <div id="sound-load2" class="form-row">
+        <label class="form-label"></label>
+        <div class="sound-load"></div>
+      </div>
+      <div id="sound-load3" class="form-row">
+        <label class="form-label"></label>
+        <div class="sound-load"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="soundPopup2" class="popup hidden">
   <div class="popup-content">
     <h3 id="soundTitle"></h3>
     <div class="form">
@@ -199,10 +229,12 @@
 <script src="script/settingUI.js"></script>
 <script src="script/patternUI.js"></script>
 <script src="script/pattern.js"></script>
+<script src="script/soundList.js"></script>
 <script src="script/soundUI.js"></script>
 <script src="script/sound.js"></script>
 <script src="script/mixer.js"></script>
 <script src="script/velocity.js"></script>
 <script src="script/main.js"></script>
+
 </body>
 </html>

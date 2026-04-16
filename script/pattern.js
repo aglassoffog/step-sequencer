@@ -7,17 +7,11 @@ function loadPattern(seqIndex, name, patternIndex) {
 
   const parsed = JSON.parse(data);
   patterns[seqIndex].splice(0, 3, ...parsed.patterns);
-  sounds[seqIndex].splice(0, 3,
-    ...(parsed.sounds || [{type: 0},{type: 1},{type: 2}]));
   tempo = parsed.tempo || 120;
 
   selectedPattern[seqIndex].patternIndex = patternIndex;
-  if (selectedPattern[0].patternIndex === selectedPattern[1].patternIndex) {
-    selectedPattern[seqIndex^1].active = false;
-  } else {
-    selectedPattern[0].active = true;
-    selectedPattern[1].active = true;
-  }
+  selectedPattern[seqIndex].active = true;
+  selectedPattern[seqIndex^1].active = false;
   
   updateUI(seqIndex);
   updatePatternList();
@@ -29,7 +23,6 @@ function savePattern(seqIndex) {
 
   const data = {
     patterns: patterns[seqIndex],
-    sounds: sounds[seqIndex],
     tempo: tempo
   };
 

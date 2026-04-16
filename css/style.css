@@ -71,11 +71,10 @@ input[type="text"] {
 }
 
 
-.track {
-  padding: 5px;
-  width: 35px;
-}
-.row0 { display: flex; margin: 10px 0; }
+.track0,
+.track1,
+.track2 { padding: 5px; width: 60px; }
+.row0,
 .row1 { display: flex; margin: 10px 0; }
 .step {
   width: 24px; height: 24px; margin: 2px;
@@ -95,11 +94,11 @@ li {
   display: flex;
   align-items: center;
 }
-#patternList button {
+li button {
   width: 60px;
   flex-shrink: 0;
 }
-#patternList span {
+li span {
   flex: 1;
   margin: 0 8px;
   white-space: nowrap;

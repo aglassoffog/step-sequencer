@@ -8,10 +8,13 @@ function initSequencerUI() {
       const row = document.createElement("div");
       row.className = "row" + seqIndex;
 
-      const sndName = document.createElement("span");
-      sndName.classList.add("track", "seq"+(seqIndex+1));
-      // sndName.textContent = soundNames[sounds[seqIndex][trackIndex].type];
-      row.appendChild(sndName);
+      const sndBtn = document.createElement("button");
+      sndBtn.textContent = "";
+      sndBtn.classList.add("button", "seq"+(seqIndex+1), "track"+trackIndex);
+      sndBtn.addEventListener("pointerdown", () => {
+        openSound(seqIndex);
+      });
+      row.appendChild(sndBtn);
 
       const velBtn = document.createElement("button");
       velBtn.textContent = "Vel";
@@ -85,8 +88,8 @@ function updateUI(seqIndex) {
   const rows = document.querySelectorAll(".row" + seqIndex);
 
   rows.forEach((row, trackIndex) => {
-    const span = row.querySelector(":scope > span");
-    span.textContent = soundNames[sounds[seqIndex][trackIndex].type];
+    const btn = row.querySelector(":scope > .track" + trackIndex);
+    btn.textContent = soundNames[sounds[seqIndex][trackIndex].type];
     
     row.querySelectorAll(":scope > .step").forEach((cell, stepIndex) => {
       const velocity = patterns[seqIndex][trackIndex][stepIndex];

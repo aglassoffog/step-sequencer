@@ -43,4 +43,5 @@ let sounds = [[
 initSequencerUI();
 initShiftUI();
 updatePatternList();
+updateSoundList();
 tabs[0].click();
