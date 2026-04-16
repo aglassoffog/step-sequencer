@@ -1,9 +1,9 @@
 body { font-family: sans-serif; background: #111; color: #fff; font-size:12px;}
 a:link {
-  color: #8888ff;
+  color: hsl(100, 40%, 50%);
 }
 a:visited {
-  color: #ffcc00;
+  color: hsl(240, 60%, 70%);
 }
 a:hover {
   color: #ffffff;
@@ -239,20 +239,26 @@ li span {
   color: hsl(201, 100%, 70%);
 }
 .seq2 {
-  /* color: hsl(0, 80%, 60%); */
-  /* color: #ce9178; */
+/*
+  color: hsl(0, 80%, 60%);
+  color: #ce9178;
+*/
   color: hsl(5, 100%, 70%);
 }
 .snd {
-  /* color: hsl(280, 80%, 60%); */
-  /* color: #c586c0; */
-  /* color: hsl(275, 100%, 65%); */
-  /* color: #6a9955; */
+/*
+  color: hsl(280, 80%, 60%);
+  color: #c586c0;
+  color: hsl(275, 100%, 65%);
+  color: #6a9955;
+*/
   color: hsl(40, 100%, 45%);
 }
 .ptn {
-  /* color: hsl(45, 80%, 60%); */
-  /* color: #dcdcaa; */
+/*
+  color: hsl(45, 80%, 60%);
+  color: #dcdcaa;
+*/
   color: hsl(60, 100%, 45%);
 }
 .stg {
@@ -262,7 +268,9 @@ li span {
   color: #eee;
 }
 .playing {
-  /* color: hsl(140, 80%, 60%); */
+/*
+  color: hsl(140, 80%, 60%);
+*/
   background: #044;
   color: #0ff;
 }
