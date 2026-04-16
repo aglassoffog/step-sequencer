@@ -1,7 +1,6 @@
-html, body { overflow: hidden; }
 body {
   font-family: sans-serif; background: #111; color: #fff; font-size:12px;
-  position: fixed; width: 100%;
+  overflow-y: auto;
 }
 
 
