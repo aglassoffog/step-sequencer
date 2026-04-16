@@ -1,7 +1,10 @@
-html, body {
-  overflow: hidden;
+html, body { overflow: hidden; }
+body {
+  font-family: sans-serif; background: #111; color: #fff; font-size:12px;
+  position: fixed; width: 100%;
 }
-body { font-family: sans-serif; background: #111; color: #fff; font-size:12px;}
+
+
 a:link {
   color: hsl(100, 40%, 50%);
 }
