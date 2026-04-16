@@ -143,7 +143,13 @@ li span {
 }
 #stepSliders input::-webkit-slider-runnable-track {
   width: 12px;
-  background: #444;
+  background: linear-gradient(
+    to top,
+    hsl(240, 60%, 70%) 0%,
+    hsl(240, 60%, 70%) var(--value),
+    #444 var(--value),
+    #444 100%
+  );
   border-radius: 6px;
 }
 #stepSliders input::-webkit-slider-thumb {
@@ -161,7 +167,7 @@ li span {
   grid-template-columns: 15px 1fr;
   gap: 10px;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .mixer-sliders input {
   -webkit-appearance: none;
@@ -171,7 +177,13 @@ li span {
 }
 .mixer-sliders input::-webkit-slider-runnable-track {
   height: 12px;
-  background: #444;
+  background: linear-gradient(
+    to right,
+    hsl(240, 60%, 70%) 0%,
+    hsl(240, 60%, 70%) var(--value),
+    #444 var(--value),
+    #444 100%
+  );
   border-radius: 6px;
 }
 .mixer-sliders input::-webkit-slider-thumb {

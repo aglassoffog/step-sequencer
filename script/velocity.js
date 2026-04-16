@@ -35,10 +35,12 @@ function openVelocity(seqIndex, trackIndex) {
     }
 
     input.oninput = () => {
+      updateSlidbar(input);
       patterns[seqIndex][trackIndex][stepIndex] = parseFloat(input.value);
       updateUI(seqIndex);
     };
 
+    updateSlidbar(input);
     sliders.appendChild(input);
   });
 }

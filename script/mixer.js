@@ -38,13 +38,25 @@ function initAudio() {
   audioCtx.resume();
 }
 
-function setVolume(seqIndex, trackIndex, value) {
+
+const mixerSliders = document.querySelectorAll(".mixer-sliders input");
+mixerSliders.forEach(bar => {
+  updateSlidbar(bar);
+});
+
+function setVolume(seqIndex, trackIndex, bar) {
+  updateSlidbar(bar);
   if (!isRunning) return;
-  seqGains[seqIndex][trackIndex].gain.value = parseFloat(value);
+  seqGains[seqIndex][trackIndex].gain.value = parseFloat(bar.value);
 }
 
 function setBalance(value) {
   if (!isRunning) return;
   mixGains[0].gain.value = parseFloat(value);
   mixGains[1].gain.value = 1 - parseFloat(value);
+}
+
+function updateSlidbar(bar) {
+  const percent = (bar.value - bar.min) / (bar.max - bar.min) * 100;
+  bar.style.setProperty("--value", percent + "%");
 }
