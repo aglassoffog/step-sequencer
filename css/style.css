@@ -1,4 +1,22 @@
 body { font-family: sans-serif; background: #111; color: #fff; font-size:12px;}
+a:link {
+  color: #8888ff;
+}
+a:visited {
+  color: #ffcc00;
+}
+a:hover {
+  color: #ffffff;
+}
+a:active {
+  color: #ff938a;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
 
 
 #app {
