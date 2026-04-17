@@ -26,6 +26,8 @@ function playSound(dest, time, velocity, typeIndex) {
     playSine(dest, time, velocity);
   } else if (typeIndex === 12) {
     playCowbell(dest, time, velocity);
+  } else if (typeIndex === 13) {
+    playRimshot(dest, time, velocity);
   }
 }
 
@@ -327,4 +329,36 @@ function playCowbell(dest, time, velocity) {
   osc2.start(time);
   osc1.stop(time + 0.2);
   osc2.stop(time + 0.2);
+}
+
+function playRimshot(dest, time, velocity) {
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = noiseBuffer;
+
+  const osc = audioCtx.createOscillator();
+  const oscGain = audioCtx.createGain();
+  osc.type = "square";
+  osc.frequency.value = 1800;
+
+  const mix = audioCtx.createGain();
+  noise.connect(mix);
+  osc.connect(mix);
+
+  const bandpass = audioCtx.createBiquadFilter();
+  bandpass.type = "bandpass";
+  bandpass.frequency.value = 3000;
+  bandpass.Q.value = 15;
+
+  const amp = audioCtx.createGain();
+  amp.gain.setValueAtTime(velocity, time);
+  amp.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
+
+  mix.connect(bandpass);
+  bandpass.connect(amp);
+  amp.connect(dest);
+
+  noise.start(time);
+  noise.stop(time + 0.3);
+  osc.start(time);
+  osc.stop(time + 0.3);
 }
