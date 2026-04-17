@@ -25,86 +25,56 @@ function play303(dest, time, velocity) {
 }
 
 
-function play909Hat(dest, time, velocity) {
-  const freqs = [400, 540, 800, 1000, 1500, 2100]; // 不協和な周波数
-  const mix = audioCtx.createGain();
+function playClap(dest, time, velocity) {
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = noiseBuffer;
 
-  freqs.forEach(f => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+  const osc = audioCtx.createOscillator();
+  osc.type = "sawtooth";
+  osc.frequency.value = 200;
 
-    osc.type = "square";
-    osc.frequency.value = f;
-
-    gain.gain.value = 0.3;
-
-    osc.connect(gain);
-    gain.connect(mix);
-
-    osc.start(time);
-    osc.stop(time + 0.8);
-  });
+  const oscGain = audioCtx.createGain();
+  oscGain.gain.value = 0.3;
 
   const bandpass = audioCtx.createBiquadFilter();
   bandpass.type = "bandpass";
-  bandpass.frequency.value = 9000;
-  bandpass.Q.value = 1;
+  bandpass.frequency.value = 2000;
+  bandpass.Q.value = 1.5;
 
-  const highpass = audioCtx.createBiquadFilter();
-  highpass.type = "highpass";
-  highpass.frequency.value = 7000;
+//  const highpass = audioCtx.createBiquadFilter();
+//  highpass.type = "highpass";
+//  highpass.frequency.value = 1200;
 
   const shaper = audioCtx.createWaveShaper();
   shaper.curve = makeDistortionCurve(3);
   shaper.oversample = "4x";
 
-  const amp = audioCtx.createGain();
-  amp.gain.setValueAtTime(0.5 * velocity, time);
-  amp.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
-
-  // mix.connect(band1).connect(amp);
-  // mix.connect(band2).connect(amp);
-  // mix.connect(band3).connect(amp);
-  // amp.connect(shaper).connect(dest);
-  mix.connect(bandpass);
-  bandpass.connect(highpass);
-  highpass.connect(amp);
-  amp.connect(shaper).connect(dest);
-}
-
-
-function playClap(dest, time, velocity) {
-  const noise = audioCtx.createBufferSource();
-  noise.buffer = noiseBuffer;
-
-  const bandpass = audioCtx.createBiquadFilter();
-  bandpass.type = "bandpass";
-  bandpass.frequency.value = 1500;
-  bandpass.Q.value = 0.7;
-
-  const highpass = audioCtx.createBiquadFilter();
-  highpass.type = "highpass";
-  highpass.frequency.value = 800;
-
-  const shaper = audioCtx.createWaveShaper();
-  shaper.curve = makeDistortionCurve(2);
-  shaper.oversample = "4x";
-
   const gain = audioCtx.createGain();
 
-  const times = [0, 0.015, 0.03, 0.045];
+  const times = [0, 0.008, 0.016, 0.024];
+  // const times = [0, 0.012, 0.025, 0.04, 0.06];
   times.forEach(t => {
     gain.gain.setValueAtTime(0.0, time + t);
-    gain.gain.linearRampToValueAtTime(0.4 * velocity, time + t + 0.001);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + t + 0.05);
+    gain.gain.linearRampToValueAtTime(1 * velocity, time + t + 0.001);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + t + 0.03);
   });
 
+  const pan = audioCtx.createStereoPanner();
+  pan.pan.value = Math.random() * 0.6 - 0.3;
+
+//  osc.connect(oscGain);
+//  oscGain.connect(gain);
   noise.connect(bandpass);
-  bandpass.connect(highpass);
-  highpass.connect(shaper);
+  bandpass.connect(shaper);
+//  highpass.connect(shaper);
   shaper.connect(gain);
+  // bandpass.connect(gain);
   gain.connect(dest);
+  // pan.connect(dest);
 
   noise.start(time);
   noise.stop(time + 0.3);
+
+  osc.start(time);
+  osc.stop(time + 0.05);
 }

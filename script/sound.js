@@ -145,7 +145,7 @@ function playBrush(dest, time, velocity) {
   const bursts = [0, 0.02, 0.04, 0.06];
   bursts.forEach((offset, i) => {
     const t = time + offset;
-    gain.gain.setValueAtTime(velocity * 0.8, t);
+    gain.gain.setValueAtTime(0.7 * velocity, t);
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
   });
 
@@ -352,7 +352,7 @@ function playRimshot(dest, time, velocity) {
   bandpass.Q.value = 15;
 
   const amp = audioCtx.createGain();
-  amp.gain.setValueAtTime(velocity, time);
+  amp.gain.setValueAtTime(2 * velocity, time);
   amp.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
 
   mix.connect(bandpass);
