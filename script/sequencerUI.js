@@ -89,8 +89,8 @@ function updateUI(seqIndex) {
 
   rows.forEach((row, trackIndex) => {
     const btn = row.querySelector(":scope > .track" + trackIndex);
-    btn.textContent = soundNames[sounds[seqIndex][trackIndex].type];
-    
+    btn.textContent = sounds[seqIndex][trackIndex].type;
+
     row.querySelectorAll(":scope > .step").forEach((cell, stepIndex) => {
       const velocity = patterns[seqIndex][trackIndex][stepIndex];
       updateStepUI(cell, velocity);

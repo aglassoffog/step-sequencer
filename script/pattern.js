@@ -32,7 +32,6 @@ function savePattern(seqIndex) {
 
 function clearPattern(seqIndex) {
   patterns[seqIndex].forEach(track => track.fill(0));
-  sounds[seqIndex].splice(0, 3, ...[{type: 0},{type: 1},{type: 2}]);
   updateUI(seqIndex);
 }
 

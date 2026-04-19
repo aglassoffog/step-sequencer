@@ -1,34 +1,34 @@
-function playSound(dest, time, velocity, typeIndex) {
+function playSound(dest, time, velocity, type) {
 
-  if (typeIndex === 0) {
+  if (type === "Click") {
     playClick(dest, time, velocity);
-  } else if (typeIndex === 1) {
+  } else if (type === "Snare") {
     playSnare(dest, time, velocity);
-  } else if (typeIndex === 2) {
+  } else if (type === "Kick") {
     playKick(dest, time, velocity);
-  } else if (typeIndex === 3) {
+  } else if (type === "Noise") {
     playNoise(dest, time, velocity);
-  } else if (typeIndex === 4) {
+  } else if (type === "Crystal") {
     playCrystal(dest, time, velocity);
-  } else if (typeIndex === 5) {
+  } else if (type === "Brush") {
     playBrush(dest, time, velocity);
-  } else if (typeIndex === 6) {
+  } else if (type === "Bass") {
     playBass(dest, time, velocity);
-  } else if (typeIndex === 7) {
+  } else if (type === "HiHat") {
     playHiHat(dest, time, velocity);
-  } else if (typeIndex === 8) {
+  } else if (type === "OpHat") {
     playOpenHat(dest, time, velocity);
-  } else if (typeIndex === 9) {
+  } else if (type === "Crash") {
     playCrash(dest, time, velocity);
-  } else if (typeIndex === 10) {
+  } else if (type === "Noise2") {
     playNoise2(dest, time, velocity);
-  } else if (typeIndex === 11) {
+  } else if (type === "Sine") {
     playSine(dest, time, velocity);
-  } else if (typeIndex === 12) {
+  } else if (type === "Cowbell") {
     playCowbell(dest, time, velocity);
-  } else if (typeIndex === 13) {
+  } else if (type === "Rimshot") {
     playRimshot(dest, time, velocity);
-  } else if (typeIndex === 14) {
+  } else if (type === "Ride") {
     playRide(dest, time, velocity);
   }
 }

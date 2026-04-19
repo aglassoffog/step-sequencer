@@ -1,53 +1,66 @@
 {
+  "sound_BassCowbellKick": {
+    "sounds": [
+      {
+        "type": "Bass"
+      },
+      {
+        "type": "Cowbell"
+      },
+      {
+        "type": "Kick"
+      }
+    ]
+  },
   "sound_HiHatCowbellKick": {
     "sounds": [
       {
-        "type": 7
+        "type": "HiHat"
       },
       {
-        "type": 12
+        "type": "Cowbell"
       },
       {
-        "type": 2
+        "type": "Kick"
       }
     ]
   },
   "sound_HiHatSnareKick": {
     "sounds": [
       {
-        "type": 7
+        "type": "HiHat"
       },
       {
-        "type": 1
+        "type": "Snare"
       },
       {
-        "type": 2
+        "type": "Kick"
       }
     ]
   },
   "sound_NoiseSineKick": {
     "sounds": [
       {
-        "type": 3
+        "type": "Noise"
       },
       {
-        "type": 11
+        "type": "Sine"
       },
       {
-        "type": 2
+        "type": "Kick"
       }
     ]
   },
   "sound_OpHatSnareKick": {
     "sounds": [
       {
-        "type": 8
+        "type": "OpHat"
       },
       {
-        "type": 1
+        "type": "Snare"
       },
       {
-        "type": 2
+        "type": "Kick"
       }
     ]
   }
