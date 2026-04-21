@@ -31,14 +31,9 @@ tabs.forEach(btn => {
 });
 
 const panel = document.getElementById("right");
+const innerWidth = window.innerWidth;
 panelBtn.addEventListener("click", () => {
   panel.classList.toggle("open");
   const vv = window.visualViewport;
-  panel.style.right = (window.innerWidth - vv.width - vv.offsetLeft) + "px";
-  console.log(window.innerWidth);
-  console.log(vv.width);
-  console.log(vv.offsetLeft);
-  // if (!vv) return;
-  // const right = Math.max(0, window.innerWidth - (vv.offsetLeft + vv.width));
-  // panel.style.transform = `translateX(${right}px)`;
+  panel.style.right = (innerWidth - vv.width - vv.offsetLeft) + "px";
 });
