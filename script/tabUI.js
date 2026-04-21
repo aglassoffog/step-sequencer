@@ -2,7 +2,8 @@ const tabNames = [
   "Pattern",
   "Mixer",
   "Shift",
-  "Sound"
+  "Sound",
+  "Setting"
 //  "SoundSet"
 ]
 const tab = document.getElementById("tabs");
@@ -43,3 +44,8 @@ document.addEventListener("click", (e) => {
     document.body.classList.remove("no-scroll");
   }
 });
+
+function updateSlidbar(bar) {
+  const percent = (bar.value - bar.min) / (bar.max - bar.min) * 100;
+  bar.style.setProperty("--value", percent + "%");
+}

@@ -55,8 +55,3 @@ function setBalance(value) {
   mixGains[0].gain.value = parseFloat(value);
   mixGains[1].gain.value = 1 - parseFloat(value);
 }
-
-function updateSlidbar(bar) {
-  const percent = (bar.value - bar.min) / (bar.max - bar.min) * 100;
-  bar.style.setProperty("--value", percent + "%");
-}

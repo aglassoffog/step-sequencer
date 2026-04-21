@@ -14,167 +14,189 @@
 </h2>
 
 <button id="playBtn" class="button ctl-btn">Start</button>
-<button id="settingBtn" class="button ctl-btn">Setting</button>
 <button id="panelBtn" class="button ctl-btn">Panel</button>
 
-  <div id="left">
-    <span class="form-label seq1">Sequence1</span>
-    <input id="patternName1" type="text" placeholder="pattern name">
-    <button id="saveBtn1" class="button seq1">Save</button>
-    <button id="clrBtn1" class="button seq1">Clear</button>
-    <div id="sequencer1">
-      <div class="row1"></div><div class="row1"></div><div class="row1"></div>
-    </div>
-
-    <br>
-
-    <span class="form-label seq2">Sequence2</span>
-    <input id="patternName2" type="text" placeholder="pattern name">
-    <button id="saveBtn2" class="button seq2">Save</button>
-    <button id="clrBtn2" class="button seq2">Clear</button>
-    <div id="sequencer2">
-      <div class="row2"></div><div class="row2"></div><div class="row2"></div>
-    </div>
+<div id="left">
+  <span class="form-label seq1">Sequence1</span>
+  <input id="patternName1" type="text" placeholder="pattern name">
+  <button id="saveBtn1" class="button seq1">Save</button>
+  <button id="clrBtn1" class="button seq1">Clear</button>
+  <div id="sequencer1">
+    <div class="row1"></div><div class="row1"></div><div class="row1"></div>
   </div>
 
-  <div id="right">
-    <div id="tabs"></div>
-    <div id="tabContents">
-      <div id="patternTab" class="tabContent">
-        <br>
-        <input id="patternSearch" type="text" placeholder="search pattern..." />
-        <ul id="patternList"></ul>
-        <br>
-        <button class="button" onclick="exportAllPatterns()">Export All</button>
-        <label class="button">
-          Import
-          <input type="file" class="hidden" onchange="importPatterns(this.files[0])">
-        </label>
-        <br><br>
-        <label class="form-label stg">Presets</label>
-        <br>
-        <ul>
-          <li><a href="presets/patterns_16beats.json" download>16beats</a></li>
-          <li><a href="presets/patterns_8beats.json" download>8beats</a></li>
-          <li><a href="presets/patterns_4headSnare8beats.json" download>4headSnare8beats</a></li>
-          <li><a href="presets/patterns_4headKick16beats.json" download>4headKick16beats</a></li>
-          <li><a href="presets/patterns_Original.json" download>Original</a></li>
-        </ul>
-      </div>
+  <br>
 
-      <div id="mixerTab" class="tabContent" style="display:none;">
-        <br>
-        <div class="form">
-          <div class="form-row">
-            <div class="form-item">
-              <input class="mixer-balance" type="range" min="0" max="1" step="0.01" value="0.5" oninput="setBalance(this.value)">
+  <span class="form-label seq2">Sequence2</span>
+  <input id="patternName2" type="text" placeholder="pattern name">
+  <button id="saveBtn2" class="button seq2">Save</button>
+  <button id="clrBtn2" class="button seq2">Clear</button>
+  <div id="sequencer2">
+    <div class="row2"></div><div class="row2"></div><div class="row2"></div>
+  </div>
+
+  <div class="footer-container">
+    <div class="version">Version: v0.2.4</div>
+    <footer class="footer">Created by aglassoffog</footer>
+  </div>
+</div>
+
+<div id="right">
+  <div id="tabs"></div>
+  <div id="tabContents">
+    <div id="patternTab" class="tabContent">
+      <br>
+      <input id="patternSearch" type="text" placeholder="search pattern..." />
+      <ul id="patternList"></ul>
+      <br>
+      <button class="button" onclick="exportAllPatterns()">Export All</button>
+      <label class="button">
+        Import
+        <input type="file" class="hidden" onchange="importPatterns(this.files[0])">
+      </label>
+      <br><br>
+      <label class="form-label stg">Presets</label>
+      <br>
+      <ul>
+        <li><a href="presets/patterns_16beats.json" download>16beats</a></li>
+        <li><a href="presets/patterns_8beats.json" download>8beats</a></li>
+        <li><a href="presets/patterns_4headSnare8beats.json" download>4headSnare8beats</a></li>
+        <li><a href="presets/patterns_4headKick16beats.json" download>4headKick16beats</a></li>
+        <li><a href="presets/patterns_Original.json" download>Original</a></li>
+      </ul>
+    </div>
+
+    <div id="mixerTab" class="tabContent" style="display:none;">
+      <br>
+      <div class="form">
+        <div class="form-row">
+          <div class="form-item">
+            <input class="mixer-balance" type="range" min="0" max="1" step="0.01" value="0.5" oninput="setBalance(this.value)">
+          </div>
+          <div>
+            <div class="mixer-sliders">
+              <span class="seq1">1</span>
+              <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, 0, this)">
             </div>
-            <div>
-              <div class="mixer-sliders">
-                <span class="seq1">1</span>
-                <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, 0, this)">
-              </div>
-              <div class="mixer-sliders">
-                <span class="seq1">2</span>
-                <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, 1, this)">
-              </div>
-              <div class="mixer-sliders">
-                <span class="seq1">3</span>
-                <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, 2, this)">
-              </div>
-              <br><br><br>
-              <div class="mixer-sliders">
-                <span class="seq2">1</span>
-                <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(1, 0, this)">
-              </div>
-              <div class="mixer-sliders">
-                <span class="seq2">2</span>
-                <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(1, 1, this)">
-              </div>
-              <div class="mixer-sliders">
-                <span class="seq2">3</span>
-                <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(1, 2, this)">
-              </div>
+            <div class="mixer-sliders">
+              <span class="seq1">2</span>
+              <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, 1, this)">
+            </div>
+            <div class="mixer-sliders">
+              <span class="seq1">3</span>
+              <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(0, 2, this)">
+            </div>
+            <br><br><br>
+            <div class="mixer-sliders">
+              <span class="seq2">1</span>
+              <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(1, 0, this)">
+            </div>
+            <div class="mixer-sliders">
+              <span class="seq2">2</span>
+              <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(1, 1, this)">
+            </div>
+            <div class="mixer-sliders">
+              <span class="seq2">3</span>
+              <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(1, 2, this)">
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div id="shiftTab" class="tabContent" style="display:none;">
-        <br>
-        <div class="form">
-          <div class="form-row">
-            <label class="form-label stg">Repeat</label>
-            <div class="shift-mode">
-              <label class="radio-label">
-                <input type="radio" name="repeatShiftMode" value="0" checked>
-                <span class="radio-span">Off</span>
+    <div id="shiftTab" class="tabContent" style="display:none;">
+      <br>
+      <div class="form">
+        <div class="form-row">
+          <label class="form-label stg">Repeat</label>
+          <div class="shift-mode">
+            <label class="radio-label">
+              <input type="radio" name="repeatShiftMode" value="0" checked>
+              <span class="radio-span">Off</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="repeatShiftMode" value="1">
+              <span class="radio-span">1</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="repeatShiftMode" value="2">
+              <span class="radio-span">1/2</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="repeatShiftMode" value="3">
+              <span class="radio-span">1/4</span>
               </label>
-              <label class="radio-label">
-                <input type="radio" name="repeatShiftMode" value="1">
-                <span class="radio-span">1</span>
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="repeatShiftMode" value="2">
-                <span class="radio-span">1/2</span>
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="repeatShiftMode" value="3">
-                <span class="radio-span">1/4</span>
-                </label>
-            </div>
-          </div>
-          <div class="form-row">
-            <label class="form-label seq1">Sequence1</label>
-            <div id="shift-seq1"></div>
-          </div>
-          <div class="form-row">
-            <label class="form-label seq2">Sequence2</label>
-            <div id="shift-seq2"></div>
-          </div>
-          <div class="form-row">
-            <label class="form-label stg">All</label>
-            <div id="shift-seq3"></div>
           </div>
         </div>
+        <div class="form-row">
+          <label class="form-label seq1">Sequence1</label>
+          <div id="shift-seq1"></div>
+        </div>
+        <div class="form-row">
+          <label class="form-label seq2">Sequence2</label>
+          <div id="shift-seq2"></div>
+        </div>
+        <div class="form-row">
+          <label class="form-label stg">All</label>
+          <div id="shift-seq3"></div>
+        </div>
       </div>
-
-      <div id="soundTab" class="tabContent" style="display:none;">
-        <br>
-        <ul id="soundList"></ul>
-        <br>
-        <button class="button" onclick="exportAllSound()">Export All</button>
-        <label class="button">
-          Import
-          <input type="file" class="hidden" onchange="importSound(this.files[0])">
-        </label>
-        <br><br>
-        <label class="form-label stg">Presets</label>
-        <br>
-        <ul>
-          <li><a href="presets/sound.json" download>sound</a></li>
-        </ul>
-      </div>
-
-      <div id="soundsetTab" class="tabContent" style="display:none;">
-        <br>
-        <ul id="soundSetList"></ul>
-        <br>
-        <button class="button" onclick="exportAllSoundSet()">Export All</button>
-        <label class="button">
-          Import
-          <input type="file" class="hidden" onchange="importSoundSet(this.files[0])">
-        </label>
-        <br><br>
-        <label class="form-label stg">Presets</label>
-        <br>
-        <ul>
-          <li><a href="presets/sounds.json" download>sounds</a></li>
-        </ul>        
-      </div>
-
     </div>
+
+    <div id="soundTab" class="tabContent" style="display:none;">
+      <br>
+      <ul id="soundList"></ul>
+      <br>
+      <button class="button" onclick="exportAllSound()">Export All</button>
+      <label class="button">
+        Import
+        <input type="file" class="hidden" onchange="importSound(this.files[0])">
+      </label>
+      <br><br>
+      <label class="form-label stg">Presets</label>
+      <br>
+      <ul>
+        <li><a href="presets/sound.json" download>sound</a></li>
+      </ul>
+    </div>
+
+    <div id="soundsetTab" class="tabContent" style="display:none;">
+      <br>
+      <ul id="soundSetList"></ul>
+      <br>
+      <button class="button" onclick="exportAllSoundSet()">Export All</button>
+      <label class="button">
+        Import
+        <input type="file" class="hidden" onchange="importSoundSet(this.files[0])">
+      </label>
+      <br><br>
+      <label class="form-label stg">Presets</label>
+      <br>
+      <ul>
+        <li><a href="presets/sounds.json" download>sounds</a></li>
+      </ul>        
+    </div>
+
+    <div id="settingTab" class="tabContent" style="display:none;">
+      <br>
+      <div class="form">
+        <div class="form-row">
+          <label class="form-label stg">Tempo</label>
+          <div class="tempo-div">
+            <input id="tempoBar" type="range" min="40" max="200" step="1">
+            <span id="tempoSpan" class="radio-span">120</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label stg">Sequence mode</label>
+          <div id="sequenceModes"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
+</div>
+
 
 <div id="stepPopup" class="popup hidden">
   <div class="popup-content">
@@ -199,25 +221,6 @@
       <div class="form-row">
         <label class="form-label">Duration</label>
         <input id="soundDuration" type="range" min="0.1" max="2" step="0.1">
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="settingPopup" class="popup hidden">
-  <div class="popup-content">
-    <h3>Setting</h3>
-    <div class="form">
-      <div class="form-row">
-        <label class="form-label stg">Tempo</label>
-        <div class="tempo-div">
-          <input id="tempo-bar" type="range" min="40" max="200" step="1">
-          <span id="tempo-span" class="radio-span">120</span>
-        </div>
-      </div>
-      <div class="form-row">
-        <label class="form-label stg">Sequence mode</label>
-        <div id="sequence-mode"></div>
       </div>
     </div>
   </div>
