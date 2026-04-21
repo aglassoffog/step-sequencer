@@ -1,4 +1,3 @@
-const allRows = document.querySelectorAll(".row1, .row2");
 const rows = [
   document.querySelectorAll(".row1"),
   document.querySelectorAll(".row2")
@@ -74,8 +73,8 @@ function updateStepUI(el, velocity) {
   el.style.opacity = velocity > 0 ? velocity : 0.3;
 }
 
-function highlightStep(step) {
-  allRows.forEach(row => {
+function highlightStep(seqIndex, step) {
+  rows[seqIndex].forEach(row => {
     row.querySelectorAll(":scope > .step").forEach((cell, i) => {
       cell.classList.toggle("playing", i === step);
     });

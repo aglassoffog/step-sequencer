@@ -24,8 +24,8 @@ function scheduleStep(step, time) {
       soundNames[sounds[seqIndex][2].Type].Play(
         seqGains[seqIndex][2], time, pattern[2][step], sounds[seqIndex][2]);
     }
+    highlightStep(seqIndex, step);
   });
-  highlightStep(step);
 }
 
 // 次へ
