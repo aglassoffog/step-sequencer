@@ -33,6 +33,6 @@ tabs.forEach(btn => {
 const panel = document.getElementById("right");
 panelBtn.addEventListener("pointerdown", () => {
   panel.classList.toggle("open");
-  // const vv = window.visualViewport;
-  // panel.style.right = (window.innerWidth - vv.width - vv.offsetLeft) + "px";
+  const vv = window.visualViewport;
+  panel.style.right = (window.innerWidth - vv.width - vv.offsetLeft) + "px";
 });
