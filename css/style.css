@@ -96,8 +96,8 @@ input[type="text"] {
 .track0,
 .track1,
 .track2 { padding: 5px; width: 60px; }
-.row0,
-.row1 { display: flex; margin: 10px 0; }
+.row1,
+.row2 { display: flex; margin: 10px 0; }
 .step {
   width: 24px; height: 24px; margin: 2px;
   background: #333; cursor: pointer;

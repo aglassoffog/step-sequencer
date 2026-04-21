@@ -1,12 +1,13 @@
-let allRows;
+const allRows = document.querySelectorAll(".row1, .row2");
+const rows = [
+  document.querySelectorAll(".row1"),
+  document.querySelectorAll(".row2")
+];
 
 function initSequencerUI() {
   patterns.forEach((pattern, seqIndex) => {
-    const container = document.getElementById("sequencer"+(seqIndex+1));
-
     pattern.forEach((track, trackIndex) => {
-      const row = document.createElement("div");
-      row.className = "row" + seqIndex;
+      const row = rows[seqIndex][trackIndex];
 
       const sndBtn = document.createElement("button");
       sndBtn.textContent = "";
@@ -17,20 +18,20 @@ function initSequencerUI() {
       row.appendChild(sndBtn);
 
       const velBtn = document.createElement("button");
-      velBtn.textContent = "Vel";
+      velBtn.textContent = "V";
       velBtn.classList.add("button", "seq"+(seqIndex+1), "group-end");
       velBtn.addEventListener("pointerdown", () => {
         openVelocity(seqIndex, trackIndex);
       });
       row.appendChild(velBtn);
 
-      // const pthBtn = document.createElement("button");
-      // pthBtn.textContent = "Pth";
-      // pthBtn.classList.add("button", "seq"+(seqIndex+1), "group-end");
-      // pthBtn.addEventListener("pointerdown", () => {
-      //   openPitch(seqIndex, trackIndex);
-      // });
-      // row.appendChild(pthBtn);
+      //const pitBtn = document.createElement("button");
+      //pitBtn.textContent = "P";
+      //pitBtn.classList.add("button", "seq"+(seqIndex+1), "group-end");
+      //pitBtn.addEventListener("pointerdown", () => {
+      //  openPitch(seqIndex, trackIndex);
+      //});
+      //row.appendChild(pitBtn);
 
       track.forEach((_, stepIndex) => {
         const div = document.createElement("div");
@@ -58,13 +59,10 @@ function initSequencerUI() {
 */
         row.appendChild(div);
       });
-
-      container.appendChild(row);
     })
 
     updateUI(seqIndex);
   });
-  allRows = document.querySelectorAll(".row0, .row1");
 }
 
 function updateStep(track, stepIndex) {
@@ -85,9 +83,7 @@ function highlightStep(step) {
 }
 
 function updateUI(seqIndex) {
-  const rows = document.querySelectorAll(".row" + seqIndex);
-
-  rows.forEach((row, trackIndex) => {
+  rows[seqIndex].forEach((row, trackIndex) => {
     const btn = row.querySelector(":scope > .track" + trackIndex);
     btn.textContent = sounds[seqIndex][trackIndex].Type;
 

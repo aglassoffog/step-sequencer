@@ -1,16 +1,8 @@
-function openVelocity(seqIndex, trackIndex) {
-  const popup = document.getElementById("stepPopup");
-  const subTitle = document.getElementById("subTitle");
-  const sliders = document.getElementById("stepSliders");
-  const control = document.getElementById("stepControl");
-
-  popup.classList.remove("hidden");
+function openStepPopup(seqIndex, trackIndex, track, title) {
+  stepPopup.classList.remove("hidden");
+  popTitle.textContent = title;
   subTitle.innerHTML = "";
-  sliders.innerHTML = "";
-  control.innerHTML = "";
-
-  const popTitle = document.getElementById("popTitle");
-  popTitle.textContent = "Velocity";
+  stepSliders.innerHTML = "";
 
   const seqTitle = document.createElement("span");
   seqTitle.textContent = "Sequence" + (seqIndex+1);
@@ -22,7 +14,7 @@ function openVelocity(seqIndex, trackIndex) {
   trackTitle.className = "seq" + (seqIndex+1);
   subTitle.appendChild(trackTitle);
 
-  patterns[seqIndex][trackIndex].forEach((step, stepIndex) => {
+  track.forEach((step, stepIndex) => {
     const input = document.createElement("input");
     input.type = "range";
     input.min = 0;
@@ -34,14 +26,14 @@ function openVelocity(seqIndex, trackIndex) {
       input.classList.add("group-end");
     }
 
-    input.oninput = () => {
+    input.addEventListener("input", () => {
       updateSlidbar(input);
-      patterns[seqIndex][trackIndex][stepIndex] = parseFloat(input.value);
+      track[stepIndex] = parseFloat(input.value);
       updateUI(seqIndex);
-    };
+    });
 
     updateSlidbar(input);
-    sliders.appendChild(input);
+    stepSliders.appendChild(input);
   });
 }
 
@@ -50,3 +42,11 @@ stepPopup.addEventListener("pointerdown", e => {
     stepPopup.classList.add("hidden");
   }
 });
+
+function openVelocity(seqIndex, trackIndex) {
+  openStepPopup(seqIndex, trackIndex, patterns[seqIndex][trackIndex], "Velocity");
+}
+
+function openPitch(seqIndex, trackIndex) {
+  openStepPopup(seqIndex, trackIndex, pitches[seqIndex][trackIndex], "Pitch");
+}
