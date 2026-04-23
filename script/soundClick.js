@@ -20,9 +20,9 @@ function playClick(dest, time, velocity, sound, pitch) {
 
 function playHiHat(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
-  const base = 0;
-  const range = 2;
-  const freq = Math.max(base + pitch * range, 0.1);
+  const base = -3;
+  const range = 6;
+  const freq = Math.pow(2, base + pitch * range);
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
@@ -49,9 +49,9 @@ function playHiHat(dest, time, velocity, sound, pitch) {
 
 function playOpenHat(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
-  const base = 0;
-  const range = 2;
-  const freq = Math.max(base + pitch * range, 0.1);
+  const base = -3;
+  const range = 6;
+  const freq = Math.pow(2, base + pitch * range);
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
@@ -78,9 +78,9 @@ function playOpenHat(dest, time, velocity, sound, pitch) {
 
 function playCrash(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
-  const base = 0;
-  const range = 2;
-  const freq = Math.max(base + pitch * range, 0.1);
+  const base = -3;
+  const range = 6;
+  const freq = Math.pow(2, base + pitch * range);
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
@@ -105,16 +105,21 @@ function playCrash(dest, time, velocity, sound, pitch) {
   noise.stop(time + sound.Envelope.Attack + (2 * sound.Envelope.Duration));
 }
 
-function playRide(dest, time, velocity, sound) {
-  const freqs = [400, 540, 800, 1000, 1500, 2100];
+function playRide(dest, time, velocity, sound, pitch) {
+  // const freqs = [400, 540, 800, 1000, 1500, 2100];
+  const freqs = [300, 440, 700, 900, 1400, 2000];
   const mix = audioCtx.createGain();
+
+  const base = 0;
+  const range = 200;
+  const freq = base + pitch * range;
 
   freqs.forEach(f => {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
 
     osc.type = "square";
-    osc.frequency.value = f;
+    osc.frequency.value = f + freq;
     gain.gain.value = 0.3;
 
     osc.connect(gain);
@@ -148,7 +153,7 @@ function playRide(dest, time, velocity, sound) {
   gain.connect(shaper).connect(dest);
 }
 
-function playCrystal(dest, time, velocity, sound, pitchVal) {
+function playCrystal(dest, time, velocity, sound, pitch) {
   const freq = 1040;
   const carrierOsc = audioCtx.createOscillator();
   const modOsc = audioCtx.createOscillator();

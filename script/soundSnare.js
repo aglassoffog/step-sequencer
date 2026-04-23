@@ -1,9 +1,9 @@
 
 function playSnare(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
-  const base = 0;
-  const range = 2;
-  const freq = Math.max(base + pitch * range, 0.1);
+  const base = -3;
+  const range = 6;
+  const freq = Math.pow(2, base + pitch * range);
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
@@ -19,9 +19,9 @@ function playSnare(dest, time, velocity, sound, pitch) {
 
 function playClap(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
-  const base = 0;
-  const range = 2;
-  const freq = Math.max(base + pitch * range, 0.1);
+  const base = -3;
+  const range = 6;
+  const freq = Math.pow(2, base + pitch * range);
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
@@ -61,9 +61,10 @@ function playBrush(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
   const gain = audioCtx.createGain();
 
-  const base = 0;
-  const range = 2;
-  const freq = Math.max(base + pitch * range, 0.1);
+  const base = -3;
+  const range = 6;
+  const freq = Math.pow(2, base + pitch * range);
+
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
