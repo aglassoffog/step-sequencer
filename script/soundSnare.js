@@ -1,7 +1,11 @@
 
-function playSnare(dest, time, velocity, sound) {
+function playSnare(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
+  const base = 0;
+  const range = 2;
+  const freq = Math.max(base + pitch * range, 0.1);
   noise.buffer = noiseBuffer;
+  noise.playbackRate.value = freq;
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
@@ -13,9 +17,13 @@ function playSnare(dest, time, velocity, sound) {
   noise.stop(time + sound.Envelope.Attack + sound.Envelope.Duration);
 }
 
-function playClap(dest, time, velocity, sound) {
+function playClap(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
+  const base = 0;
+  const range = 2;
+  const freq = Math.max(base + pitch * range, 0.1);
   noise.buffer = noiseBuffer;
+  noise.playbackRate.value = freq;
 
   const bandpass = audioCtx.createBiquadFilter();
   bandpass.type = "bandpass";
@@ -55,7 +63,7 @@ function playBrush(dest, time, velocity, sound, pitch) {
 
   const base = 0;
   const range = 2;
-  const freq = base + pitch * range;
+  const freq = Math.max(base + pitch * range, 0.1);
   noise.buffer = noiseBuffer;
   noise.playbackRate.value = freq;
 
