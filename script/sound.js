@@ -13,19 +13,20 @@ function playKick(dest, time, velocity, sound) {
   osc.stop(time + sound.Envelope.Duration);
 }
 
-function playSine(dest, time, velocity, sound) {
+function playSine(dest, time, velocity, sound, pitch) {
   const osc = audioCtx.createOscillator();
-  osc.frequency.value = 440;
+  const base = 220;
+  const range = 440;
+  const freq = base + pitch * range;
+  osc.frequency.value = freq;
 
   const filter = audioCtx.createBiquadFilter();
   filter.type = "lowpass";
   filter.Q.value = 20;
-  const base = 2000;
-  const range = 6000;
-  const freq = base + Math.random() * range;
+  const flt = 2000 + Math.random() * 6000;
 
   filter.frequency.setValueAtTime(100, time);
-  filter.frequency.exponentialRampToValueAtTime(freq, time + 0.05);
+  filter.frequency.exponentialRampToValueAtTime(flt, time + 0.05);
   filter.frequency.exponentialRampToValueAtTime(100, time + 0.4);
 
   const shaper = audioCtx.createWaveShaper();
@@ -42,12 +43,15 @@ function playSine(dest, time, velocity, sound) {
   osc.stop(time + sound.Envelope.Attack + sound.Envelope.Duration);
 }
 
-function playBass(dest, time, velocity, sound) {
+function playBass(dest, time, velocity, sound, pitch) {
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
 
+  const base = 60;
+  const range = 100;
+  const freq = base + pitch * range;
   osc.type = "sawtooth";
-  osc.frequency.value = 80;
+  osc.frequency.value = freq;
 
   gain.gain.setValueAtTime(0, time);
   gain.gain.linearRampToValueAtTime(0.5 * velocity, time + (0.5 * sound.Envelope.Attack));
@@ -58,14 +62,17 @@ function playBass(dest, time, velocity, sound) {
   osc.stop(time + sound.Envelope.Attack + sound.Envelope.Duration);
 }
 
-function playPad(dest, time, velocity, sound) {
+function playPad(dest, time, velocity, sound, pitch) {
   const osc1 = audioCtx.createOscillator();
   const osc2 = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
   const filter = audioCtx.createBiquadFilter();
 
-  osc1.type = "sawtooth";
-  osc2.type = "sawtooth";
+  const base = 80;
+  const range = 2000;
+  const freq = base + pitch * range;
+  osc1.type = osc2.type = "sawtooth";
+  osc1.frequency.value = osc2.frequency.value = freq;
   osc1.detune.value = -10;
   osc2.detune.value = 10;
 
