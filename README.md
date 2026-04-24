@@ -44,20 +44,15 @@ The goal is to help you discover rhythms you have never heard before.
 
 ## How to Play
 
-1. **Settings**
-   Press the panel button to open the side panel, where all settings are organized in tabs.
+1. Press the panel button to open the side panel, where all settings are organized in tabs.
 
-2. **Presets**
-   **First**, download a preset and import it from the link at the bottom of the Pattern tab.
+2. **First**, download a preset and import it from the link at the bottom of the Pattern tab.
 
-3. **Play**
-   Press the Play button to start the sequence.
+3. Press the Play button to start the sequence.
 
-4. **Adjust**
-   Use the **V** and **P** buttons to adjust velocity and pitch, which are saved to the pattern.
+4. Use the **V** and **P** buttons to adjust velocity and pitch, which are saved to the pattern.
 
-5. **Sound**
-   Use the sound name button to adjust sound type, attack, and duration, which can be saved as a sound.
+5. Use the sound name button to adjust sound type, attack, and duration, which can be saved as a sound.
 
 6. For other operations, please refer to the demo video.
 
