@@ -39,10 +39,10 @@ function clearPattern(seqIndex) {
   updateUI(seqIndex);
 }
 
-saveBtn1.addEventListener("pointerdown", () => {savePattern(0);});
-saveBtn2.addEventListener("pointerdown", () => {savePattern(1);});
-clrBtn1.addEventListener("pointerdown", () => {clearPattern(0);});
-clrBtn2.addEventListener("pointerdown", () => {clearPattern(1);});
+saveBtn1.addEventListener("click", () => {savePattern(0);});
+saveBtn2.addEventListener("click", () => {savePattern(1);});
+clrBtn1.addEventListener("click", () => {clearPattern(0);});
+clrBtn2.addEventListener("click", () => {clearPattern(1);});
 
 function importPatterns(file) {
   const reader = new FileReader();

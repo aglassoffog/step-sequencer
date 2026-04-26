@@ -41,7 +41,7 @@ function openSound(seqIndex, trackIndex) {
     const button = document.createElement("button");
     button.classList.add("button");
     button.textContent = type;
-    button.addEventListener("pointerdown", () => {
+    button.addEventListener("click", () => {
       label.textContent = type;
       soundName.value = "";
       soundAttack.value = sound.Envelope.Attack;
@@ -80,13 +80,13 @@ soundDuration.addEventListener("input", () => {
   sounds[soundSeqIndex][soundTrackIndex].Envelope.Duration = parseFloat(soundDuration.value);
 });
 
-soundPopup.addEventListener("pointerdown", e => {
+soundPopup.addEventListener("click", e => {
   if (e.target === soundPopup) {
     soundPopup.classList.add("hidden");
   }
 });
 
-soundSaveBtn.addEventListener("pointerdown", () => {
+soundSaveBtn.addEventListener("click", () => {
   const name = soundName.value.trim();
   if (!name) return alert("Please enter the sound name.");
   const data = {

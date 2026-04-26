@@ -37,7 +37,7 @@ function openStepPopup(seqIndex, trackIndex, track, title) {
   });
 }
 
-stepPopup.addEventListener("pointerdown", e => {
+stepPopup.addEventListener("click", e => {
   if (e.target === stepPopup) {
     stepPopup.classList.add("hidden");
   }

@@ -182,7 +182,7 @@ async function scheduler() {
   }
 }
 
-playBtn.addEventListener("pointerdown", async () => {
+playBtn.addEventListener("click", async () => {
   if (!isRunning) {
     await initAudio();
     isRunning = true;

@@ -11,7 +11,7 @@ function initSequencerUI() {
       const sndBtn = document.createElement("button");
       sndBtn.textContent = "";
       sndBtn.classList.add("button", "seq"+(seqIndex+1), "track"+trackIndex);
-      sndBtn.addEventListener("pointerdown", () => {
+      sndBtn.addEventListener("click", () => {
         openSound(seqIndex, trackIndex);
       });
       row.appendChild(sndBtn);
@@ -19,7 +19,7 @@ function initSequencerUI() {
       const velBtn = document.createElement("button");
       velBtn.textContent = "V";
       velBtn.classList.add("button", "seq"+(seqIndex+1));
-      velBtn.addEventListener("pointerdown", () => {
+      velBtn.addEventListener("click", () => {
         openVelocity(seqIndex, trackIndex);
       });
       row.appendChild(velBtn);
@@ -27,7 +27,7 @@ function initSequencerUI() {
       const pitBtn = document.createElement("button");
       pitBtn.textContent = "P";
       pitBtn.classList.add("button", "seq"+(seqIndex+1), "group-end");
-      pitBtn.addEventListener("pointerdown", () => {
+      pitBtn.addEventListener("click", () => {
         openPitch(seqIndex, trackIndex);
       });
       row.appendChild(pitBtn);
@@ -40,7 +40,7 @@ function initSequencerUI() {
           div.classList.add("group-end");
         }
 
-        div.addEventListener("pointerdown", () => {
+        div.addEventListener("click", () => {
           updateStep(pattern[trackIndex], stepIndex);
           updateStepUI(div, seqIndex, trackIndex, stepIndex);
         });
