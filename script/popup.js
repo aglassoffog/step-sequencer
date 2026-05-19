@@ -30,7 +30,8 @@ function openStepPopup(seqIndex, trackIndex, track, title) {
     input.step = 0.01;
     input.value = step;
     if (sounds[seqIndex][trackIndex].Scale != null) {
-      span.textContent = createNoteSpan(track, stepIndex, input, sounds[seqIndex][trackIndex]);
+      const freq = quantizeFreq(track[stepIndex], sounds[seqIndex][trackIndex]);
+      span.textContent = freqToNote(freq);
     }
 
     if ((stepIndex + 1) % 4 === 0) {
@@ -41,7 +42,9 @@ function openStepPopup(seqIndex, trackIndex, track, title) {
       updateSlidbar(input);
       track[stepIndex] = parseFloat(input.value);
       if (sounds[seqIndex][trackIndex].Scale != null) {
-        span.textContent = createNoteSpan(track, stepIndex, input, sounds[seqIndex][trackIndex]);
+        const freq = quantizeFreq(track[stepIndex], sounds[seqIndex][trackIndex]);
+        track[stepIndex] = input.value = freqToPitch(freq, sounds[seqIndex][trackIndex]);
+        span.textContent = freqToNote(freq);
       }
       updateUI(seqIndex);
     });
@@ -128,10 +131,10 @@ function createKeyDiv(seqIndex, trackIndex) {
 
   return keyOptionDiv;
 }
-
+/*
 function createNoteSpan(track, stepIndex, input, sound) {
   const freq = quantizeFreq(track[stepIndex], sound);
-  const note = freqToNote(freq);
-  input.value = freqToPitch(freq, sound);
-  return note;
+  track[stepIndex] = input.value = freqToPitch(freq, sound);
+  return freqToNote(freq);
 }
+*/
