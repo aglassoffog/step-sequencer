@@ -21,7 +21,9 @@ const soundNames = {
   Sine2:   {Play: playSine2, Envelope: {Attack: 0, Duration: 0.4}, Scale: 0, Pitch: {Base: 220, Oct: 3}}, // A3-6
   Bass:    {Play: playBass, Envelope: {Attack: 0, Duration: 0.3}, Scale: 0, Pitch: {Base: 55, Oct: 2}}, // A1-3
   Lead:    {Play: playLead, Envelope: {Attack: 0, Duration: 0.5}, Scale: 0, Pitch: {Base: 440, Oct: 3}}, // A4-7
-  Pad:     {Play: playPad, Envelope: {Attack: 0.2, Duration: 1}, Scale: 0, Pitch: {Base: 55, Oct: 5}} // A1-6
+  Pad:     {Play: playPad, Envelope: {Attack: 0.1, Duration: 1}, Scale: 0, Pitch: {Base: 55, Oct: 5}}, // A1-6
+
+  Filter:  {Play: playFilter, Envelope: {Attack: 0, Duration: 0.1}}
 };
 let soundSeqIndex;
 let soundTrackIndex;

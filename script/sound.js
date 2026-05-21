@@ -54,8 +54,8 @@ function playSine(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   osc.connect(filter).connect(shaper).connect(gain).connect(dest);
   osc.start(time);
@@ -74,8 +74,8 @@ function playSine2(dest, time, velocity, sound, pitch) {
 
     const gain = audioCtx.createGain();
     gain.gain.setValueAtTime(0, time);
-    gain.gain.linearRampToValueAtTime(0.4 * velocity, time + (0.5 * sound.Envelope.Attack));
-    gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+    gain.gain.linearRampToValueAtTime(0.4 * velocity, time + sound.Envelope.Attack);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
     osc1.connect(gain);
     osc2.connect(gain);
@@ -95,8 +95,8 @@ function playBass(dest, time, velocity, sound, pitch) {
   osc.frequency.value = sound.Pitch.Base * Math.pow(2, pitch * sound.Pitch.Oct);
 
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   osc.connect(gain).connect(dest);
   osc.start(time);
@@ -125,8 +125,8 @@ function playLead(dest, time, velocity, sound, pitch) {
   lfoGain.gain.value = 3;
 
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.2 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.2 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   osc1.connect(gain);
   osc2.connect(gain);
@@ -162,9 +162,8 @@ function playPad(dest, time, velocity, sound, pitch) {
   filter.frequency.value = 800;
 
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.3 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.cancelScheduledValues(time + sound.Envelope.Duration);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.3 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   osc1.connect(filter);
   osc2.connect(filter);
@@ -174,4 +173,12 @@ function playPad(dest, time, velocity, sound, pitch) {
   osc2.start(time);
   osc1.stop(time + sound.Envelope.Attack + sound.Envelope.Duration);
   osc2.stop(time + sound.Envelope.Attack + sound.Envelope.Duration);
+}
+
+function playFilter(dest, time, velocity, sound, pitch) {
+  const value = parseInt(filterFreq.value);
+  const freq = 100 + pitch * 11900;
+  effectFilter.tone.frequency.cancelScheduledValues(time);
+  effectFilter.tone.frequency.linearRampToValueAtTime(freq, time + sound.Envelope.Attack);
+  effectFilter.tone.frequency.exponentialRampToValueAtTime(value, time + sound.Envelope.Attack + sound.Envelope.Duration);
 }

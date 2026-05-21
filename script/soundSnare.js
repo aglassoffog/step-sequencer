@@ -1,4 +1,3 @@
-
 function playSnare(dest, time, velocity, sound, pitch) {
   const noise = audioCtx.createBufferSource();
   const base = -3;
@@ -10,7 +9,7 @@ function playSnare(dest, time, velocity, sound, pitch) {
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
   gain.gain.linearRampToValueAtTime(velocity, time + sound.Envelope.Attack);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   noise.connect(gain).connect(dest);
   noise.start(time);
@@ -44,7 +43,7 @@ function playClap(dest, time, velocity, sound, pitch) {
     const t = time + offset;
     gain.gain.setValueAtTime(0, t);
     gain.gain.linearRampToValueAtTime(0.5 * velocity, t + sound.Envelope.Attack);
-    gain.gain.exponentialRampToValueAtTime(0.001, t + sound.Envelope.Duration);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + sound.Envelope.Attack + sound.Envelope.Duration);
   });
 
   noise.connect(bandpass);
@@ -73,7 +72,7 @@ function playBrush(dest, time, velocity, sound, pitch) {
     const t = time + offset;
     gain.gain.setValueAtTime(0, t);
     gain.gain.linearRampToValueAtTime(0.7 * velocity, t + sound.Envelope.Attack);
-    gain.gain.exponentialRampToValueAtTime(0.001, t + sound.Envelope.Duration);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + sound.Envelope.Attack + sound.Envelope.Duration);
   });
 
   noise.connect(gain);
@@ -105,8 +104,8 @@ function playRimshot(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(2 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(2 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   mix.connect(bandpass);
   bandpass.connect(gain);
@@ -140,9 +139,8 @@ function playCowbell(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.cancelScheduledValues(time + sound.Envelope.Duration);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   osc1.connect(bandpass);
   osc2.connect(bandpass);
@@ -178,8 +176,8 @@ function playNoise(dest, time, velocity, sound, pitch) {
   filter.frequency.exponentialRampToValueAtTime(1000, time + 0.2);
 
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(velocity, time + (0.05 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + (0.5 * sound.Envelope.Duration));
+  gain.gain.linearRampToValueAtTime(velocity, time + (0.1 * sound.Envelope.Attack));
+  gain.gain.exponentialRampToValueAtTime(0.001, time + (0.1 * sound.Envelope.Attack) + (0.5 * sound.Envelope.Duration));
 
   osc.connect(filter).connect(gain).connect(dest);
   osc.start(time);
@@ -208,9 +206,8 @@ function playNoise2(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.cancelScheduledValues(time + sound.Envelope.Duration);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   noise.connect(filter).connect(shaper).connect(gain).connect(dest);
   noise.start(time);

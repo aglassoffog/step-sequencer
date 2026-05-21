@@ -10,8 +10,8 @@ function playClick(dest, time, velocity, sound, pitch) {
   osc.frequency.value = freq;
 
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + (0.1 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + (0.2 * sound.Envelope.Attack));
+  gain.gain.exponentialRampToValueAtTime(0.001, time + (0.2 * sound.Envelope.Attack) + sound.Envelope.Duration);
 
   osc.connect(gain).connect(dest);
   osc.start(time);
@@ -32,8 +32,8 @@ function playHiHat(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + (0.25 * sound.Envelope.Duration));
+  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + (0.25 * sound.Envelope.Duration));
 
   const shaper = audioCtx.createWaveShaper();
   shaper.curve = new Float32Array([ -1, -0.5, 0, 0.5, 1 ]);
@@ -61,8 +61,8 @@ function playOpenHat(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.4 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   const shaper = audioCtx.createWaveShaper();
   shaper.curve = new Float32Array([ -1, -0.5, 0, 0.5, 1 ]);
@@ -90,8 +90,8 @@ function playCrash(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.3 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.01, time + (2 * sound.Envelope.Duration));
+  gain.gain.linearRampToValueAtTime(0.3 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.01, time + sound.Envelope.Attack + (2 * sound.Envelope.Duration));
 
   const shaper = audioCtx.createWaveShaper();
   shaper.curve = new Float32Array([ -1, -0.5, 0, 0.5, 1 ]);
@@ -144,8 +144,8 @@ function playRide(dest, time, velocity, sound, pitch) {
 
   const gain = audioCtx.createGain();
   gain.gain.setValueAtTime(0, time);
-  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + (0.5 * sound.Envelope.Attack));
-  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  gain.gain.linearRampToValueAtTime(0.5 * velocity, time + sound.Envelope.Attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   mix.connect(bandpass);
   bandpass.connect(highpass);
@@ -162,9 +162,6 @@ function playCrystal(dest, time, velocity, sound, pitch) {
   carrierOsc.type = "sine";
   modOsc.type = "sine";
 
-  // const freq = 1040;
-  // const base = 840;
-  // const range = 400;
   const freq = sound.Pitch.Base * Math.pow(2, pitch * sound.Pitch.Oct);
   carrierOsc.frequency.value = freq;
   modOsc.frequency.value = freq * 2.7;
@@ -177,7 +174,7 @@ function playCrystal(dest, time, velocity, sound, pitch) {
 
   crystalGain.gain.setValueAtTime(0, time);
   crystalGain.gain.linearRampToValueAtTime(0.4 * velocity, time + sound.Envelope.Attack);
-  crystalGain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Duration);
+  crystalGain.gain.exponentialRampToValueAtTime(0.001, time + sound.Envelope.Attack + sound.Envelope.Duration);
 
   carrierOsc.start(time);
   modOsc.start(time);
